@@ -31,7 +31,7 @@ pkg update && pkg upgrade -y && pkg install -y git openssh termux-api
 mkdir -p /storage/emulated/0/Documents/Repository
 ```
 ```bash
-git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository
+git clone https://github.com/GiGiDKR/OhMyObsidianSync.git ~/storage/shared/Documents/Repository/OhMyObsidianSync
 ```
 > [!IMPORTANT]
 > Be aware that the next step will set [safe.directory](https://git-scm.com/docs/git-config/2.35.2#Documentation/git-config.txt-safedirectory) to '*'
