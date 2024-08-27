@@ -1,7 +1,7 @@
 
 #!/data/data/com.termux/files/usr/bin/bash
 
-source /storage/emulated/0/Documents/Repository/Obsidian/OhMyObsidianSync/bashrc
+source /storage/emulated/0/Documents/Repository/OhMyObsidianSync/bashrc
  
 ### Turn off untrusted repo protection
 
@@ -30,8 +30,8 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
     fi
 
     # Check if 'setup' file in repo is different from the one in $HOME
-    if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/setup" > /dev/null; then
-        cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/\""
+    if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidianSync/setup" > /dev/null; then
+        cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidianSync/\""
         echo -e "$cmd" | termux-clipboard-set
         echo -e "${RED}The 'setup' file has been updated.\nRun the following command to update it (it's already in your clipboard):\n${YELLOW}${cmd}${RESET}"
         echo -e "${RED}Exiting script.${RESET}"
@@ -92,9 +92,9 @@ fi
 
 ### Copy and chmod scripts to $HOME/ObsidianSync
 
-DEST_DIR="$HOME/ObsidianSync/"
+DEST_DIR="$HOME/OhMyObsidianSync/"
 
-for file in "$SCRIPTS_REPO_PATH"/*; do
+for file in "$SCRIPTS_REPO_PATH"; do
   filename=$(basename -- "$file")
   cp "$file" "$DEST_DIR/"
   chmod +x "$DEST_DIR/$filename"
