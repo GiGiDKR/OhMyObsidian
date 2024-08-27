@@ -29,6 +29,8 @@ pkg update && pkg upgrade -y && pkg install -y git openssh termux-api
 ```
 ```bash
 mkdir -p /storage/emulated/0/Documents/Repository
+```
+```bash
 git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository
 ```
 > [!IMPORTANT]
