@@ -1,6 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-source /storage/emulated/0/Documents/Repository/Obsidian/obsidian-android-sync/bashrc
-
+source /storage/emulated/0/Documents/Repository/Obsidian/OhMyObsidianSync/bashrc
 ### Turn off untrusted repo protection
 
 cd "$SCRIPTS_REPO_PATH"
