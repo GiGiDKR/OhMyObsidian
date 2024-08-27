@@ -38,8 +38,8 @@ git clone https://github.com/GiGiDKR/OhMyObsidianSync.git ~/storage/shared/Docum
    
 4. Run the setup script :
 ```bash
-mkdir -p $HOME/OhMyObsidian
-cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian && chmod +x "$HOME/OhMyObsidian/setup" && source "$HOME/OhMyObsidian/setup"
+mkdir -p $HOME/OhMyObsidianSync
+cp "/storage/emulated/0/Documents/Repository/OhMyObsidianSync/setup" ~/OhMyObsidianSync && chmod +x "$HOME/OhMyObsidianSync/setup" && source "$HOME/OhMyObsidianSync/setup"
 ```
 5. The above command copied an SSH public key to your clipboard (or was displayed to the screen), paste this into your Git host's SSH key authentication setting (eg [Github](https://github.com/settings/keys)). If you want to copy the SSH key again, run the setup script again by simply running **`setup`**.
 
