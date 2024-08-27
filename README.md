@@ -1,1 +1,0 @@
-# obsidian-android-sync
