@@ -98,9 +98,9 @@ for file in "$SCRIPTS_REPO_PATH"/*; do
   chmod +x "$DEST_DIR/$filename"
 done
 
-### Add source to bashrc
-
+### Define configuration files
 BASHRC_FILE="/data/data/com.termux/files/usr/etc/bash.bashrc"
+ZSHRC_FILE="$HOME/.zshrc"
 
 declare -a LINES_TO_ADD=(
   "source $SCRIPTS_REPO_PATH/bashrc # obsidian-sync-source-tag"
@@ -115,9 +115,17 @@ modify_or_add_line_with_tag() {
   echo "$line" >> "$file"
 }
 
+# Add to bash.bashrc
 for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
+
+### If zsh is installed, add to .zshrc 
+if command -v zsh > /dev/null 2>&1; then
+  for line in "${LINES_TO_ADD[@]}"; do
+    modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
+  done
+fi
 
 ### Make sure user.name and user.email is populated
 
