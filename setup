@@ -90,7 +90,7 @@ fi
 
 ### Copy and chmod scripts to $HOME/ObsidianSync
 
-DEST_DIR="$HOME/ObsidianSync"
+DEST_DIR="$HOME/ObsidianSync/"
 
 for file in "$SCRIPTS_REPO_PATH"/*; do
   filename=$(basename -- "$file")
