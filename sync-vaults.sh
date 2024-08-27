@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 source /data/data/com.termux/files/usr/etc/bash.bashrc
 
-LOCK_FILE="$HOME/ObsidianSync/sync-vaults.lock"
+LOCK_FILE="$HOME/OhMyObsidianSync/sync-vaults.lock"
 
 # Function to remove lock file
 cleanup() {
@@ -33,13 +33,13 @@ echo $$ > "$LOCK_FILE"
 
 skip_pause_val="--skip-pause"
 
-source "$HOME/ObsidianSync/log_helper.sh"
-log_file="$HOME/ObsidianSync/sync.log"
+source "$HOME/OhMyObsidianSync/log_helper.sh"
+log_file="$HOME/OhMyObsidianSync/sync.log"
 setup_logging $log_file
 
 cmd () {
   printf "\n\033[0;34m%s\033[0m\n" "$(basename "$PWD")"
-  $HOME/ObsidianSync/git-sync -ns 2>&1 | tee $LAST_SYNC_PATH
+  $HOME/OhMyObsidianSync/git-sync -ns 2>&1 | tee $LAST_SYNC_PATH
 
   if [ $? -ne 0 ]; then
 	cat $LAST_SYNC_PATH >> $NOTIFICATION_PATH # Send notifcation
