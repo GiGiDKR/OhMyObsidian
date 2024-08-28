@@ -24,7 +24,7 @@ wait_for_lock_release() {
 
 if [ -e "$LOCK_FILE" ]; then
     if [ -z "$(ps -p $(cat "$LOCK_FILE") -o pid=)" ]; then
-        echo "Removing stale lock file."
+        echo "Suppression du fichier de verrouillage obsolète."
         rm -f "$LOCK_FILE"
     else
         wait_for_lock_release
@@ -66,11 +66,11 @@ for dir in "$OBSIDIAN_DIR_PATH"/*; do
   fi
 done
 
-msg="You can try running 'setup' to see if it helps."
+msg="Vous pouvez essayer de lancer 'setup' pour voir si cela aide."
 
 # Exit if no Git repository found 
 if [ ${#git_repos[@]} -eq 0 ]; then
-  echo -e "${YELLOW}No Git repositories found in the Obsidian folder.\n${msg}${RESET}"
+  echo -e "${YELLOW}Aucun dépôt Git trouvé dans le dossier Obsidian.\n${msg}${RESET}"
   cleanup
 fi
 
@@ -78,7 +78,7 @@ if [[ -n "$1" && "$1" != "--skip-pause" ]]; then
   if [[ " ${git_repos[@]} " =~ " $OBSIDIAN_DIR_PATH/$1 " ]]; then
     (cd "$OBSIDIAN_DIR_PATH/$1" && cmd)
   else
-    echo -e "${RED}Specified directory doesn't exist or is not a Git repository.\n${msg}${RESET}"
+    echo -e "${RED}Le répertoire spécifié n'existe pas ou n'est pas un dépôt Git.\n${msg}${RESET}"
     cleanup
   fi
 else
@@ -90,7 +90,7 @@ fi
 log_cleanup "$log_file"
 
 if [ "$skip_pause" = false ]; then
-  echo -e '\n\033[44;97mPress enter to finish ...\033[0m'
+  echo -e '\n\033[44;97mAppuyez sur Entrée pour terminer ...\033[0m'
   read -r none
 fi
 
