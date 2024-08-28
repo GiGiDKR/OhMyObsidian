@@ -57,7 +57,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 > [!TIP]
 > Setting up a Credential Helper
-> - Open your terminal and run the following command to configure Git to remember your credentials during a session :
+> - Run the following command to configure Git to remember your credentials during a session :
 > ```bash
 > git config --global credential.helper cache
 > ```
