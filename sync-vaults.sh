@@ -1,7 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/bash
+
+clear
+
 source /data/data/com.termux/files/usr/etc/bash.bashrc
 
-LOCK_FILE="$HOME/OhMyObsidianSync/sync-vaults.lock"
+LOCK_FILE="$HOME/OhMyObsidian/sync-vaults.lock"
 
 # Function to remove the lock file 
 cleanup() {
@@ -39,13 +42,13 @@ for arg in "$@"; do
   fi
 done
 
-source "$HOME/OhMyObsidianSync/log_helper.sh"
-log_file="$HOME/OhMyObsidianSync/sync.log"
+source "$HOME/OhMyObsidian/log_helper.sh"
+log_file="$HOME/OhMyObsidian/sync.log"
 setup_logging "$log_file"
 
 cmd () {
   printf "\n\033[0;34m%s\033[0m\n" "$(basename "$PWD")"
-  "$HOME/OhMyObsidianSync/git-sync" -ns 2>&1 | tee "$LAST_SYNC_PATH"
+  "$HOME/OhMyObsidian/git-sync" -ns 2>&1 | tee "$LAST_SYNC_PATH"
   if [ $? -ne 0 ]; then
     cat "$LAST_SYNC_PATH" >> "$NOTIFICATION_PATH"
   fi
