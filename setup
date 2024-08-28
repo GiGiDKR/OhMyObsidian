@@ -4,8 +4,7 @@ clear
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
  
-### Turn off untrusted repo protection
-
+# Turn off untrusted repo protection
 cd "$SCRIPTS_REPO_PATH"
 existing_dirs=$(git config --global --get-all safe.directory)
 
@@ -13,8 +12,7 @@ if [[ ! $existing_dirs == *"*"* ]]; then
     git config --global --add safe.directory "*"
 fi
 
-### Update scripts repo
-
+# Update scripts repo
 cd "$SCRIPTS_REPO_PATH"
 git fetch > /dev/null
 git_status=$(git status)
@@ -30,9 +28,9 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
       exit 1
     fi
 
-    # Check if 'setup' file in repo is different from the one in $HOME
-    if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidianSync/setup" > /dev/null; then
-        cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidianSync/\""
+    # Check if 'setup' file in repo is different from the one in $HOME/OhMyObsidian
+    if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
+        cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
         echo -e "${RED}The 'setup' file has been updated.\nRun the following command to update it (it's already in your clipboard):\n${YELLOW}${cmd}${RESET}"
         echo -e "${RED}Exiting script.${RESET}"
@@ -41,8 +39,7 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
   fi
 fi
 
-### Make sure Termux has file permissions
-
+# Make sure Termux has file permissions
 if touch "$STORAGE_PATH"/.termux_permission_check; then
   rm "$STORAGE_PATH"/.termux_permission_check
 else
@@ -50,28 +47,13 @@ else
   echo -e "${BLUE}Run 'termux-setup-storage' or give the permission from Termux's permissions menu on Android.${RESET}"
 fi
 
-### Enable allow-external-apps
-
+# Enable allow-external-apps
 if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
   sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
   termux-reload-settings
 fi
 
-### Install packages -- attempt
-
-# package_installed() {
-#   dpkg -l | grep -q "$1"
-# }
-
-# for pkg in git termux-api openssh; do
-#   if ! package_installed "$pkg"; then
-#     echo "Installing $pkg..."
-#     apt-get install -y "$pkg"
-#   fi
-# done
-
-### Create SSH keys
-
+# Create SSH keys
 if [ ! -f ~/.ssh/id_rsa ]; then
   echo -e "${BLUE}Creating an SSH key...${RESET}"
   ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null
@@ -91,8 +73,7 @@ else
   echo -e "\n${BLUE}Here's your SSH key (above in ${YELLOW}yellow${BLUE}) in case you want to copy it.${RESET}"
 fi
 
-### Copy and chmod scripts to $HOME/OhMyObsidian
-
+# Copy and chmod scripts to $HOME/OhMyObsidian
 DEST_DIR="$HOME/OhMyObsidian"
 
 for file in "$SCRIPTS_REPO_PATH"/*; do
@@ -101,7 +82,8 @@ for file in "$SCRIPTS_REPO_PATH"/*; do
   chmod +x "$DEST_DIR/$filename"
 done
 
-### Define configuration files
+# Define configuration files
+
 BASHRC_FILE="/data/data/com.termux/files/usr/etc/bash.bashrc"
 ZSHRC_FILE="$HOME/.zshrc"
 
@@ -123,15 +105,14 @@ for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
 
-### If zsh is installed, add to .zshrc 
+# If zsh is installed, add to .zshrc 
 if command -v zsh > /dev/null 2>&1; then
   for line in "${LINES_TO_ADD[@]}"; do
     modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
   done
 fi
 
-### Make sure user.name and user.email is populated
-
+# Make sure user.name and user.email is populated
 git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
 
@@ -145,18 +126,15 @@ fi
   git config --global user.email "$git_email"
 fi
 
-### Git config
-
+# Git config
 git config --global core.editor nano
 git config --global merge.conflictstyle diff3
 
-###
-
+# Create and access the Obsidian directory
 touch $NOTIFICATION_PATH
 
 mkdir -p $OBSIDIAN_DIR_PATH
-
 cd $OBSIDIAN_DIR_PATH
 
-echo -e "\n${GREEN}Setup complete${RESET}\n"
+echo -e "\n${GREEN}OhMyObsidian setup complete${RESET}\n"
 
