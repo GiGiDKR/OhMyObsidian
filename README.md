@@ -50,9 +50,9 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 > [!NOTE]
 > - To sync all the vaults in the **`/storage/emulated/0/Documents/Repository/Obsidian`** folder, you can run :
 > **`sync`**
-> - To get the status of the vault sync, run :
+> - To get the status of the vault sync :
 > **`status`** 
-> - To open Obsidian from Termux, run: 
+> - To open Obsidian from Termux : 
 > **`open`**
 
 
