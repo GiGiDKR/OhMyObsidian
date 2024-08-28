@@ -30,7 +30,7 @@ termux-setup-storage
 pkg update && pkg upgrade -y && pkg install -y git openssh termux-api
 ```
 ```bash
-mkdir -p /storage/emulated/0/Documents/Repository
+mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 ```
 ```bash
 git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository/OhMyObsidian
@@ -40,7 +40,6 @@ git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents
    
 2. Run the setup script :
 ```bash
-mkdir -p $HOME/OhMyObsidian
 cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/ && chmod +x "$HOME/OhMyObsidian/setup" && source "$HOME/OhMyObsidian/setup"
 ```
 3. The above command copied an SSH public key to your clipboard (or was displayed to the screen), paste this into your Git host's SSH key authentication setting (eg [Github](https://github.com/settings/keys)). If you want to copy the SSH key again, run the **`setup`** script again.
