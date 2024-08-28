@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-clear
+clear && echo -e '\033[44;97m OhMyObsidian \033[0m'
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
  
@@ -136,5 +136,5 @@ touch $NOTIFICATION_PATH
 mkdir -p $OBSIDIAN_DIR_PATH
 cd $OBSIDIAN_DIR_PATH
 
-echo -e "\n${GREEN}OhMyObsidian setup complete${RESET}\n"
+echo -e "\n${GREEN}Setup complete${RESET}\n"
 
