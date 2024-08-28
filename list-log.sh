@@ -15,7 +15,7 @@ while true; do
     fi
 
     # Prompt the user
-    echo -e '\n\033[44;97mPress R to reload or Enter to exit...\033[0m'
+    echo -e '\n\033[44;97mAppuyez sur R pour recharger ou sur Entrée pour quitter...\033[0m'
     read -r -n 1 -s input # Read a single character in silent mode
 
     # Check if the input is Enter (empty)
