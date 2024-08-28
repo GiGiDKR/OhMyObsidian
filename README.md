@@ -22,15 +22,16 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 
 ## OhMyObsidian setup
 
+> [!TIP]
+> To install/update Termux packages you can select a particular repository to increase the speed of download :
+> ```bash
+> termux-change-repo
+> ```
+
 1. Run the following commands :
 ```bash
 termux-setup-storage
 ```
-> [!TIP]
-> To install/update Termux packages you can select a particular repository to increase the speed of data traffic :
-> ```bash
-> termux-change-repo
-> ```
 ```bash
 pkg update && pkg upgrade -y && pkg install -y git openssh termux-api
 ```
