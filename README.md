@@ -57,15 +57,15 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 > [!TIP]
 > Setting up a Credential Helper
-> - Run the following command to configure Git to remember your credentials during a session :
+> Run the following command to configure Git to remember your credentials during a session :
 > ```bash
 > git config --global credential.helper cache
 > ```
-> - By default, this remembers credentials for 15 minutes. You can adjust this by adding a timeout in seconds, for example for 1 hour:
+> By default, this remembers credentials for 15 minutes. You can adjust this by adding a timeout in seconds, for example for 1 hour:
 > ```bash
 > git config --global credential.helper 'cache --timeout=3600'
 > ```
-> - If you want Git to remember your credentials permanently (which may be less secure), use :
+> If you want Git to remember your credentials permanently (which may be less secure), use :
 > ```bash
 > git config --global credential.helper store
 >```
