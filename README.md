@@ -20,10 +20,10 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 1. Install [F-Droid](https://f-droid.org/en/) or [Obtainium](https://github.com/ImranR98/Obtainium)
 2. Install Termux from [F-Droid](https://f-droid.org/en/packages/com.termux/) or [Obtainium](https://github.com/termux/termux-app)
 
-## OhMyObsidian setup
+## Obsidian sync setup
 
 > [!TIP]
-> To install/update Termux packages you can select a particular repository to increase the speed of download :
+> To install / update packages you can select a particular repository to increase the speed of download :
 > ```bash
 > termux-change-repo
 > ```
