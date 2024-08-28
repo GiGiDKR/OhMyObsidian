@@ -15,5 +15,5 @@ done
 
 echo
 
-echo -e '\033[44;97mPress enter to finish...\033[0m'
+echo -e '\033[44;97mAppuyer sur Entrée pour terminer...\033[0m'
 read none
