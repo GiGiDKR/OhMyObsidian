@@ -3,24 +3,24 @@ source /data/data/com.termux/files/usr/etc/bash.bashrc
 
 LOCK_FILE="$HOME/OhMyObsidianSync/sync-vaults.lock"
 
-# Function to remove lock file
+# Function to remove the lock file 
 cleanup() {
     rm -f "$LOCK_FILE"
     exit 1
 }
 
-# Trap to catch interruptions
+# Trap to catch interruptions 
 trap cleanup INT TERM
 
-# Function to wait for lock release
+# Function to wait for the lock to be released 
 wait_for_lock_release() {
     while [ -e "$LOCK_FILE" ]; do
         sleep 1
     done
 }
 
-if [ -e "$LOCK_FILE" ]; then # check if the lock file exists
-    if [ -z "$(ps -p $(cat "$LOCK_FILE") -o pid=)" ]; then # Check if the process that created the lockfile is still running
+if [ -e "$LOCK_FILE" ]; then
+    if [ -z "$(ps -p $(cat "$LOCK_FILE") -o pid=)" ]; then
         echo "Removing stale lock file."
         rm -f "$LOCK_FILE"
     else
@@ -28,27 +28,32 @@ if [ -e "$LOCK_FILE" ]; then # check if the lock file exists
     fi
 fi
 
-# Store the PID in the lock file
+# Store PID in lock file 
 echo $$ > "$LOCK_FILE"
 
-skip_pause_val="--skip-pause"
+skip_pause=false
+for arg in "$@"; do
+  if [ "$arg" == "--skip-pause" ]; then
+    skip_pause=true
+    break
+  fi
+done
 
 source "$HOME/OhMyObsidianSync/log_helper.sh"
 log_file="$HOME/OhMyObsidianSync/sync.log"
-setup_logging $log_file
+setup_logging "$log_file"
 
 cmd () {
   printf "\n\033[0;34m%s\033[0m\n" "$(basename "$PWD")"
-  $HOME/OhMyObsidianSync/git-sync -ns 2>&1 | tee $LAST_SYNC_PATH
-
+  "$HOME/OhMyObsidianSync/git-sync" -ns 2>&1 | tee "$LAST_SYNC_PATH"
   if [ $? -ne 0 ]; then
-	cat $LAST_SYNC_PATH >> $NOTIFICATION_PATH # Send notifcation
+    cat "$LAST_SYNC_PATH" >> "$NOTIFICATION_PATH"
   fi
 }
 
 git_repos=()
 
-# Populate the array with Git repos from the Obsidian folder
+# Fill the table with the Git repositories from the Obsidian folder 
 for dir in "$OBSIDIAN_DIR_PATH"/*; do
   if [ -d "$dir" ]; then
     cd "$dir"
@@ -58,33 +63,33 @@ for dir in "$OBSIDIAN_DIR_PATH"/*; do
   fi
 done
 
-msg="You can try running 'setup' to see if it helps".
+msg="You can try running 'setup' to see if it helps."
 
-# Exit if no Git repos are found
+# Exit if no Git repository found 
 if [ ${#git_repos[@]} -eq 0 ]; then
   echo -e "${YELLOW}No Git repositories found in the Obsidian folder.\n${msg}${RESET}"
-  exit 1
+  cleanup
 fi
 
-if [[ -n "$1" && "$1" != "$skip_pause_val" ]]; then # Sync a single repo
+if [[ -n "$1" && "$1" != "--skip-pause" ]]; then
   if [[ " ${git_repos[@]} " =~ " $OBSIDIAN_DIR_PATH/$1 " ]]; then
     (cd "$OBSIDIAN_DIR_PATH/$1" && cmd)
   else
     echo -e "${RED}Specified directory doesn't exist or is not a Git repository.\n${msg}${RESET}"
-    exit 1
+    cleanup
   fi
-else  # Sync all Git repos
+else
   for repo in "${git_repos[@]}"; do
     (cd "$repo" && cmd)
   done
 fi
 
-log_cleanup $log_file
+log_cleanup "$log_file"
 
-if [[ -z "$1" ]]; then
-  bypass_log "echo -e '\n\033[44;97mPress enter to finish...\033[0m' && read none"
+if [ "$skip_pause" = false ]; then
+  echo -e '\n\033[44;97mPress enter to finish...\033[0m'
+  read -r none
 fi
-
 
 rm -f "$LOCK_FILE"
 exit 0
