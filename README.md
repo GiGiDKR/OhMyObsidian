@@ -55,6 +55,19 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 > - To open Obsidian from Termux : 
 > **`open`**
 
+### Setting up a Credential Helper
+Open your terminal and run the following command to configure Git to remember your credentials during a session:
+```bash
+git config --global credential.helper cache
+```
+By default, this remembers credentials for 15 minutes. You can adjust this by adding a timeout in seconds, for example for 1 hour:
+```bash
+git config --global credential.helper 'cache --timeout=3600'
+```
+ If you want Git to remember your credentials permanently (which may be less secure), use:
+```bash
+git config --global credential.helper store
+```
 
 ## Tasker Setup [^1]
 1. Install [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) from the Play Store.
