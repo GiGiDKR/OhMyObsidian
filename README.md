@@ -94,7 +94,8 @@ git config --global credential.helper store
 
 All vaults will sync at 4am every day using a Tasker profile.
 
-[^1]: Do not use for now: code adaptation to come in version 1.0.2 
+[^1]: Do not use for now: code adaptation to come in version 1.0.3
+
 ## Notes
 - You should get a notification if a sync fails. This requires AutoNotification from the PlayStore. To disable this, disable the Sync Error Notification profile.
 - The individual vault icons to open specific vaults can be a bit slow. I've tried different ways to open a vault. Faster ways had one of two problems. Either it would open the vault correctly, but then if you left the app, it would not appear in the recents list. Or, it would load the app, load the last vault used, then load the vault you wanted which ends up being slower then the current method. You can find almost all the methods I tried in the Open Vault task (they are disabled).
@@ -103,5 +104,6 @@ All vaults will sync at 4am every day using a Tasker profile.
 
 ## Version history
 - **1.0.0** : Initial version (adapted from [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
-- **1.0.1** : Added zsh-friendly configuration 
-- **1.0.2** : WIP...
+- **1.0.1** : Added zsh-friendly configuration
+- **1.0.2** : French translation 
+- **1.0.3** : WIP...
