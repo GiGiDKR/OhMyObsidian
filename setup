@@ -1,7 +1,9 @@
 
 #!/data/data/com.termux/files/usr/bin/bash
 
-source /storage/emulated/0/Documents/Repository/OhMyObsidianSync/bashrc
+clear
+
+source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
  
 ### Turn off untrusted repo protection
 
@@ -90,9 +92,9 @@ else
   echo -e "\n${BLUE}Here's your SSH key (above in ${YELLOW}yellow${BLUE}) in case you want to copy it.${RESET}"
 fi
 
-### Copy and chmod scripts to $HOME/ObsidianSync
+### Copy and chmod scripts to $HOME/OhMyObsidian
 
-DEST_DIR="$HOME/OhMyObsidianSync"
+DEST_DIR="$HOME/OhMyObsidian"
 
 for file in "$SCRIPTS_REPO_PATH"/*; do
   filename=$(basename -- "$file")
