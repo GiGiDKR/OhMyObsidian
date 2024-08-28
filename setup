@@ -1,4 +1,3 @@
-
 #!/data/data/com.termux/files/usr/bin/bash
 
 clear
@@ -154,6 +153,8 @@ git config --global merge.conflictstyle diff3
 ###
 
 touch $NOTIFICATION_PATH
+
+mkdir -p $OBSIDIAN_DIR_PATH
 
 cd $OBSIDIAN_DIR_PATH
 
