@@ -20,7 +20,7 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 1. Install [F-Droid](https://f-droid.org/en/) or [Obtainium](https://github.com/ImranR98/Obtainium)
 2. Install Termux from [F-Droid](https://f-droid.org/en/packages/com.termux/) or [Obtainium](https://github.com/termux/termux-app)
 
-## OhMyObsidianSync setup
+## OhMyObsidian setup
 
 1. Run the following commands :
 ```bash
