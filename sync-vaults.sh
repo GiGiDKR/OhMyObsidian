@@ -90,7 +90,7 @@ fi
 log_cleanup "$log_file"
 
 if [ "$skip_pause" = false ]; then
-  echo -e '\n\033[44;97mPress enter to finish...\033[0m'
+  echo -e '\n\033[44;97mPress enter to finish ...\033[0m'
   read -r none
 fi
 
