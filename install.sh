@@ -5,7 +5,7 @@ RESET_COLOR='\033[0m'
 
 show_banner() {
     clear
-    echo -e '\033[44;97m            OhMyObsidian            \033[0m'
+    echo -e '\033[44;97m               OhMyObsidian               \033[0m'
     echo
 }
 
