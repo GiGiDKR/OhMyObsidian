@@ -39,7 +39,7 @@ show_banner() {
 check_and_install_gum() {
     if $USE_GUM && ! command -v gum &> /dev/null; then
         bash_banner
-        echo -e "${TEXT_COLOR}Installation de gum...${RESET_COLOR}"
+        echo -e "${TEXT_COLOR}Installation de gum${RESET_COLOR}"
         pkg update -y > /dev/null 2>&1 && pkg install gum -y > /dev/null 2>&1
     fi
 }
@@ -64,16 +64,13 @@ show_banner
 
 if $USE_GUM; then
     if gum confirm --prompt.foreground="33" --selected.background="33" "Changer de dépôt Termux ?"; then
-        show_banner
-        gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Changement du dépôt Termux" -- termux-change-repo
+        termux-change-repo
     fi
 else
     echo -ne "${TEXT_COLOR}"
     read -p "Changer de dépôt Termux ? (o/n) " change_repo
     echo -ne "${RESET_COLOR}"
     if [[ "$change_repo" == "o" || "$change_repo" == "O" ]]; then
-        show_banner
-        echo -e "${TEXT_COLOR}Changement du dépôt Termux${RESET_COLOR}"
         termux-change-repo
     fi
 fi
