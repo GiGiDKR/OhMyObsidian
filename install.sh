@@ -75,7 +75,6 @@ else
     fi
 fi
 
-show_banner
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Configuration du stockage externe" -- termux-setup-storage
 else
@@ -83,7 +82,6 @@ else
     termux-setup-storage
 fi
 
-show_banner
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Mise à jour des paquets" -- pkg update -y
 else
