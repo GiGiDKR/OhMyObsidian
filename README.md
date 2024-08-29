@@ -32,7 +32,7 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 > ```
 
 > [!TIP]
-> To install / update packages you can select a particular repository to increase the speed of download :
+> Optional : To install / update packages you can select a particular repository to increase the speed of download :
 > ```bash
 > termux-change-repo
 > ```
