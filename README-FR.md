@@ -1,6 +1,6 @@
 # OhMyObsidian
 
-Synchronisez facilement vos coffres Obsidian sur Android en utilisant Git (SSH) + Termux, avec automatisation et raccourcis via Tasker. Cela fonctionne en synchronisant un coffre lorsqu'il est ouvert et lorsqu'il est fermé.
+Synchronisez facilement vos coffres Obsidian sur Android en utilisant Git (SSH) + Termux, avec automatisation et raccourcis via Tasker, que le coffre soit ouvert ou fermé.
 
 [Voici une image](https://bit.ly/40hLIyt) de ce à quoi cela ressemble, une fois terminé avec des raccourcis vers certaines fonctions utilitaires optionnelles. Chaque coffre aura sa propre icône. Cela permet de synchroniser de manière plus efficace car sans cela, tous les coffres se synchronisent à chaque fois dans un ordre spécifique. Au lieu de simplement synchroniser immédiatement le coffre que vous ouvrez. Si vous n'utilisez qu'un seul coffre ou si vous ne vous souciez pas de l'inefficacité d'attendre que le coffre que vous venez d'ouvrir soit mis à jour, vous pouvez utiliser l'icône par défaut de l'application Obsidian. De plus, tous les coffres sont synchronisés une fois par jour (par défaut à 4h du matin).
 
