@@ -85,16 +85,16 @@ fi
 
 show_banner
 if $USE_GUM; then
-    gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Mise à jour des paquets" -- pkg update > /dev/null 2>&1 && pkg upgrade -y > /dev/null 2>&1
+    gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Mise à jour des paquets" -- pkg update -y
 else
     echo -e "${TEXT_COLOR}Mise à jour des paquets${RESET_COLOR}"
-    pkg update > /dev/null 2>&1 && pkg upgrade -y > /dev/null 2>&1
+    pkg update -y > /dev/null 2>&1
 fi
 
 echo
 for pkg in git openssh termux-api; do
     if $USE_GUM; then
-        gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Installation de $pkg" -- pkg install -y $pkg > /dev/null 2>&1
+        gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Installation de $pkg" -- pkg install -y $pkg
     else
         echo -e "${TEXT_COLOR}Installation de $pkg${RESET_COLOR}"
         pkg install -y $pkg > /dev/null 2>&1
