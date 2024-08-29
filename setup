@@ -8,6 +8,8 @@ show_banner
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 
+echo -e "${BLUE}Installation de OhMyObsidian...${RESET}"
+
 # Turn off untrusted repo protection
 cd "$SCRIPTS_REPO_PATH"
 existing_dirs=$(git config --global --get-all safe.directory)
@@ -56,6 +58,8 @@ if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
   sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties > /dev/null 2>&1
   termux-reload-settings > /dev/null 2>&1
 fi
+
+clear
 
 # Create SSH keys
 if [ ! -f ~/.ssh/id_rsa ]; then
