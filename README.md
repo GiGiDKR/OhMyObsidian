@@ -96,7 +96,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 All vaults will sync at 4am every day using a Tasker profile.
 
-[^1]: Do not use for now: code adaptation to come in version 1.0.3
+[^1]: Do not use for now: code adaptation to come in version 1.1
 
 ## Notes
 - You should get a notification if a sync fails. This requires AutoNotification from the PlayStore. To disable this, disable the Sync Error Notification profile.
@@ -105,7 +105,8 @@ All vaults will sync at 4am every day using a Tasker profile.
 - If this repository has new commits that you want, running the **`setup`** command should pull them down. After which, you may be prompted to run a command to update the setup script itself, if it was updated.
 
 ## Version history
-- **1.0.0** : Initial version (adapted from [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
+- **1.0** : Initial version (adapted from [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
 - **1.0.1** : Added zsh-friendly configuration
 - **1.0.2** : French translation 
-- **1.0.3** : WIP...
+- **1.0.3** : Added a script to automate installation  
+- **1.1** : WIP
