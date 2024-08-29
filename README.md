@@ -64,7 +64,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 > **`open`**
 
 > [!TIP]
-> By default Git does not remember your credentials but it is possible to change this with the use of a Credential Helper :
+> By default Git does not remember your credentials but it is possible to change this with a Credential Helper :
 >
 > To remember your credentials during a session :
 > ```bash
