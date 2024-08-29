@@ -25,6 +25,12 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 
 ## Obsidian sync setup
 
+> [!IMPORTANT]
+> A full installation script is available, to run it enter:
+> ```bash
+> curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
+> ```
+
 > [!TIP]
 > To install / update packages you can select a particular repository to increase the speed of download :
 > ```bash
@@ -44,7 +50,7 @@ mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 ```bash
 git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository/OhMyObsidian
 ```
-> [!IMPORTANT]
+> [!WARNING]
 > Be aware that the next step will set [safe.directory](https://git-scm.com/docs/git-config/2.35.2#Documentation/git-config.txt-safedirectory) to '*'
    
 2. Run the setup script :
