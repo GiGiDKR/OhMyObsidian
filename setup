@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-clear && echo -e '\033[44;97m       OhMyObsidian.     \033[0m'
+clear && echo -e '\033[44;97m       OhMyObsidian       \033[0m'
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 
