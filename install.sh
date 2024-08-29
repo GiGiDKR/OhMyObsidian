@@ -25,18 +25,30 @@ echo -e "${TEXT_COLOR}Configuration du stockage externe${RESET_COLOR}"
 termux-setup-storage
 
 show_banner
-echo -e "${TEXT_COLOR}Installation des dépendances${RESET_COLOR}"
+echo -e "${TEXT_COLOR}Mise à jour des paquets${RESET_COLOR}"
 pkg update > /dev/null 2>&1 && pkg upgrade -y > /dev/null 2>&1
-pkg install -y git openssh termux-api > /dev/null 2>&1
 
+for pkg in git openssh termux-api; do
+    echo -e "${TEXT_COLOR}Installation de $pkg${RESET_COLOR}"
+    pkg install -y $pkg > /dev/null 2>&1
+done
+
+echo
 echo -e "${TEXT_COLOR}Création des répertoires nécessaires${RESET_COLOR}"
 mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 
-echo -e "${TEXT_COLOR}Clonage du dépôt OhMyObsidian${RESET_COLOR}"
-git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository/OhMyObsidian
+echo
+REPO_PATH="$HOME/storage/shared/Documents/Repository/OhMyObsidian"
+if [ -d "$REPO_PATH" ]; then
+    echo -e "${TEXT_COLOR}Dépôt OhMyObsidian déjà existant${RESET_COLOR}"
+else
+    echo -e "${TEXT_COLOR}Clonage du dépôt OhMyObsidian${RESET_COLOR}"
+    git clone https://github.com/GiGiDKR/OhMyObsidian.git "$REPO_PATH"
+fi
 
+echo
 echo -e "${TEXT_COLOR}Copie du script de configuration${RESET_COLOR}"
-cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" "$HOME/OhMyObsidian/"
+cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 source "$HOME/OhMyObsidian/setup"
 
