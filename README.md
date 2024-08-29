@@ -25,10 +25,11 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 ## Obsidian sync setup
 
 > [!IMPORTANT]
-> A full installation script is available, to run it enter:
+> A full installation script is available, to run it (with gum) enter:
 > ```bash
-> curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
+> curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh --gum
 > ```
+> Remove `--gum` at the end of the command to use the classic bash interface
 
 ### Manual installation  
 
@@ -115,5 +116,6 @@ All vaults will sync at 4am every day using a Tasker profile.
 - **1.0** : Initial version (adapted from [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
 - **1.0.1** : Added zsh-friendly configuration
 - **1.0.2** : French translation 
-- **1.0.3** : Added a [script](install.sh) to automate installation  
+- **1.0.3** : Added a [script](install.sh) to automate installation
+- **1.0.4** : Added ability to use gum for script interface 
 - **1.1** : WIP
