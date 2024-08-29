@@ -30,11 +30,10 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 > curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
 > ```
 
-> [!TIP]
-> Optional : To install / update packages you can select a particular repository to increase the speed of download :
-> ```bash
-> termux-change-repo
-> ```
+0. Optional : To install / update packages you can select a particular repository to increase the speed of download :
+```bash
+termux-change-repo
+```
 
 1. Run the following commands :
 ```bash
