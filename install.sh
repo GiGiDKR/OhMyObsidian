@@ -43,3 +43,5 @@ echo -e "${TEXT_COLOR}Copie du script de configuration...${RESET_COLOR}"
 cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 source "$HOME/OhMyObsidian/setup"
+
+rm "$0"
