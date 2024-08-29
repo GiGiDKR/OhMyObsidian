@@ -119,7 +119,7 @@ else
     fi
 fi
 
-echo -e "${TEXT_COLOR}Copie du script de configuration${RESET_COLOR}"
+clear
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 source "$HOME/OhMyObsidian/setup"
