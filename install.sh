@@ -91,7 +91,6 @@ else
     pkg update -y > /dev/null 2>&1
 fi
 
-echo
 for pkg in git openssh termux-api; do
     if $USE_GUM; then
         gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Installation de $pkg" -- pkg install -y $pkg
@@ -101,7 +100,6 @@ for pkg in git openssh termux-api; do
     fi
 done
 
-echo
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Création des répertoires nécessaires" -- mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 else
@@ -109,7 +107,6 @@ else
     mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 fi
 
-echo
 REPO_PATH="$HOME/storage/shared/Documents/Repository/OhMyObsidian"
 if [ -d "$REPO_PATH" ]; then
     echo -e "${TEXT_COLOR}Dépôt OhMyObsidian déjà existant${RESET_COLOR}"
@@ -122,14 +119,9 @@ else
     fi
 fi
 
-echo
-if $USE_GUM; then
-    gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Copie du script de configuration" -- bash -c "cp '$REPO_PATH/setup' '$HOME/OhMyObsidian/' && chmod +x '$HOME/OhMyObsidian/setup' && source '$HOME/OhMyObsidian/setup'"
-else
-    echo -e "${TEXT_COLOR}Copie du script de configuration${RESET_COLOR}"
-    cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
-    chmod +x "$HOME/OhMyObsidian/setup"
-    source "$HOME/OhMyObsidian/setup"
-fi
+echo -e "${TEXT_COLOR}Copie du script de configuration${RESET_COLOR}"
+cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
+chmod +x "$HOME/OhMyObsidian/setup"
+source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
