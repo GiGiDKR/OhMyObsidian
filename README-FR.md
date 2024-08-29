@@ -60,21 +60,20 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 > **`open`**
 
 > [!TIP]
-> Par défaut, Git ne mémorise pas vos identifiants, mais il est possible de changer cela avec l'utilisation d'un Helper d'identifiants.
-
-### Configuration d'un Helper d'identifiants
-Exécutez la commande suivante pour configurer Git afin de mémoriser vos identifiants pendant une session :
-```bash
-git config --global credential.helper cache
-```
-Par défaut, cela mémorise les identifiants pendant 15 minutes. Vous pouvez ajuster cela en ajoutant un délai en secondes, par exemple pour 1 heure :
-```bash
-git config --global credential.helper 'cache --timeout=3600'
-```
-Si vous souhaitez que Git mémorise vos identifiants de manière permanente (ce qui peut être moins sécurisé), utilisez :
-```bash
-git config --global credential.helper store
-```
+> Par défaut, Git ne mémorise pas vos identifiants, mais il est possible de changer cela avec un Credential Helper :
+>
+> Afin de mémoriser vos identifiants pendant une session :
+> ```bash
+> git config --global credential.helper cache
+> ```
+> Pour mémoriser pendant 1 heure :
+> ```bash
+> git config --global credential.helper 'cache --timeout=3600'
+> ```
+> Mémoriser de manière permanente (moins sécurisé) :
+> ```bash
+> git config --global credential.helper store
+> ```
 
 ## Configuration de Tasker [^1]
 1. Installez [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) depuis le Play Store.
