@@ -9,19 +9,19 @@ cd "$SCRIPTS_REPO_PATH"
 existing_dirs=$(git config --global --get-all safe.directory)
 
 if [[ ! $existing_dirs == *"*"* ]]; then
-    git config --global --add safe.directory "*"
+    git config --global --add safe.directory "*" > /dev/null 2>&1
 fi
 
 # Update scripts repo
 cd "$SCRIPTS_REPO_PATH"
-git fetch > /dev/null
+git fetch > /dev/null 2>&1
 git_status=$(git status)
 
 if [[ "$git_status" == *"Your branch is behind"* ]]; then
   if [[ "$git_status" == *"Changes not staged for commit"* || "$git_status" == *"Changes to be committed"* ]]; then
     echo -e "${RED}Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Continuer le script...${RESET}"
   else
-    if git pull > /dev/null 2>&1; then
+    if git pull -q > /dev/null 2>&1; then
       echo -e "${GREEN}Le dépôt de scripts a été mis à jour !${RESET}"
     else
       echo -e "${RED}Échec de la mise à jour du dépôt de scripts.${RESET}"
@@ -40,8 +40,8 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
 fi
 
 # Make sure Termux has file permissions
-if touch "$STORAGE_PATH"/.termux_permission_check; then
-  rm "$STORAGE_PATH"/.termux_permission_check
+if touch "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1; then
+  rm "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1
 else
   echo -e "${RED}Termux n'a pas les permissions de fichier.${RESET}"
   echo -e "${BLUE}Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
@@ -49,14 +49,14 @@ fi
 
 # Enable allow-external-apps
 if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
-  sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
-  termux-reload-settings
+  sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties > /dev/null 2>&1
+  termux-reload-settings > /dev/null 2>&1
 fi
 
 # Create SSH keys
 if [ ! -f ~/.ssh/id_rsa ]; then
   echo -e "${BLUE}Création d'une clé SSH...${RESET}"
-  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null
+  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null 2>&1
 
   if cat ~/.ssh/id_rsa.pub | termux-clipboard-set; then
     echo -e "${BLUE}La clé publique SSH a été copiée dans votre presse-papiers.${RESET}"
@@ -78,8 +78,8 @@ DEST_DIR="$HOME/OhMyObsidian"
 
 for file in "$SCRIPTS_REPO_PATH"/*; do
   filename=$(basename -- "$file")
-  cp "$file" "$DEST_DIR/"
-  chmod +x "$DEST_DIR/$filename"
+  cp "$file" "$DEST_DIR/" > /dev/null 2>&1
+  chmod +x "$DEST_DIR/$filename" > /dev/null 2>&1
 done
 
 # Define configuration files
@@ -96,7 +96,7 @@ modify_or_add_line_with_tag() {
   local file=$2
   local tag=$(echo "$line" | awk -F'#' '{print $2}')
 
-  sed -i "/$tag/d" "$file"
+  sed -i "/$tag/d" "$file" > /dev/null 2>&1
   echo "$line" >> "$file"
 }
 
@@ -118,22 +118,22 @@ git_email=$(git config --global user.email)
 
 if [ -z "$git_name" ]; then
   read -p "Entrez votre git user.name : " git_name
-  git config --global user.name "$git_name"
+  git config --global user.name "$git_name" > /dev/null 2>&1
 fi
 
- if [ -z "$git_email" ]; then
+if [ -z "$git_email" ]; then
   read -p "Entrez votre git user.email : " git_email
-  git config --global user.email "$git_email"
+  git config --global user.email "$git_email" > /dev/null 2>&1
 fi
 
 # Git config
-git config --global core.editor nano
-git config --global merge.conflictstyle diff3
+git config --global core.editor nano > /dev/null 2>&1
+git config --global merge.conflictstyle diff3 > /dev/null 2>&1
 
 # Create and access the Obsidian directory
-touch $NOTIFICATION_PATH
+touch $NOTIFICATION_PATH > /dev/null 2>&1
 
-mkdir -p $OBSIDIAN_DIR_PATH
+mkdir -p $OBSIDIAN_DIR_PATH > /dev/null 2>&1
 cd $OBSIDIAN_DIR_PATH
 
 echo -e "\n${GREEN}Configuration terminée${RESET}\n"
