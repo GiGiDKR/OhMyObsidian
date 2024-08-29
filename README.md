@@ -1,5 +1,7 @@
 # OhMyObsidian
 
+[French Version](README-FR.md) 
+
 Easily sync your Obsidian vaults on Android using Git (SSH) + Termux, with automation and shortcuts using Tasker.
 It works by syncing a vault when it's opened and when it's closed.
 
