@@ -28,6 +28,7 @@ show_banner
 echo -e "${TEXT_COLOR}Mise à jour des paquets${RESET_COLOR}"
 pkg update > /dev/null 2>&1 && pkg upgrade -y > /dev/null 2>&1
 
+echo
 for pkg in git openssh termux-api; do
     echo -e "${TEXT_COLOR}Installation de $pkg${RESET_COLOR}"
     pkg install -y $pkg > /dev/null 2>&1
@@ -48,6 +49,7 @@ fi
 
 echo
 echo -e "${TEXT_COLOR}Copie du script de configuration${RESET_COLOR}"
+echo
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 source "$HOME/OhMyObsidian/setup"
