@@ -117,7 +117,6 @@ else
     fi
 fi
 
-clear
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 source "$HOME/OhMyObsidian/setup"
