@@ -16,8 +16,7 @@ done
 
 bash_banner() {
     clear
-    echo -e '\033[44;97m               OhMyObsidian               \033[0m'
-    echo
+    echo -e '\n\033[44;97m               OHMYOBSIDIAN               \n\033[0m'
 }
 
 show_banner() {
@@ -39,7 +38,7 @@ show_banner() {
 check_and_install_gum() {
     if $USE_GUM && ! command -v gum &> /dev/null; then
         bash_banner
-        echo -e "${TEXT_COLOR}Installation de gum...${RESET_COLOR}"
+        echo -e "${TEXT_COLOR}:: Installation de gum...${RESET_COLOR}"
         pkg update -y > /dev/null 2>&1 && pkg install gum -y > /dev/null 2>&1
     fi
 }
@@ -68,7 +67,7 @@ if $USE_GUM; then
     fi
 else
     echo -ne "${TEXT_COLOR}"
-    read -p "Changer de dépôt Termux ? (o/n) " change_repo
+    read -p "  Changer de dépôt Termux ? (o/n) " change_repo
     echo -ne "${RESET_COLOR}"
     if [[ "$change_repo" == "o" || "$change_repo" == "O" ]]; then
         termux-change-repo
@@ -78,14 +77,14 @@ fi
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Configuration du stockage externe" -- termux-setup-storage
 else
-    echo -e "${TEXT_COLOR}Configuration du stockage externe${RESET_COLOR}"
+    echo -e "${TEXT_COLOR}:: Configuration du stockage externe${RESET_COLOR}"
     termux-setup-storage
 fi
 
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Mise à jour des paquets" -- pkg update -y
 else
-    echo -e "${TEXT_COLOR}Mise à jour des paquets${RESET_COLOR}"
+    echo -e "${TEXT_COLOR}:: Mise à jour des paquets${RESET_COLOR}"
     pkg update -y > /dev/null 2>&1
 fi
 
@@ -93,7 +92,7 @@ for pkg in git openssh termux-api; do
     if $USE_GUM; then
         gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Installation de $pkg" -- pkg install -y $pkg
     else
-        echo -e "${TEXT_COLOR}Installation de $pkg${RESET_COLOR}"
+        echo -e "${TEXT_COLOR}:: Installation de $pkg${RESET_COLOR}"
         pkg install -y $pkg > /dev/null 2>&1
     fi
 done
@@ -101,7 +100,7 @@ done
 if $USE_GUM; then
     gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Création des répertoires nécessaires" -- mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 else
-    echo -e "${TEXT_COLOR}Création des répertoires nécessaires${RESET_COLOR}"
+    echo -e "${TEXT_COLOR}:: Création des répertoires nécessaires${RESET_COLOR}"
     mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 fi
 
@@ -112,7 +111,7 @@ else
     if $USE_GUM; then
         gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Clonage du dépôt OhMyObsidian" -- git clone https://github.com/GiGiDKR/OhMyObsidian.git "$REPO_PATH"
     else
-        echo -e "${TEXT_COLOR}Clonage du dépôt OhMyObsidian${RESET_COLOR}"
+        echo -e "${TEXT_COLOR}:: Clonage du dépôt OhMyObsidian${RESET_COLOR}"
         git clone https://github.com/GiGiDKR/OhMyObsidian.git "$REPO_PATH"
     fi
 fi
