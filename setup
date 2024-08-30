@@ -1,14 +1,15 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 show_banner() {
-    echo -e '\033[44;97m              Obsidian Sync              \033[0m'
+    clear
+    echo -e '\n\033[44;97m               OBSIDIANSYNC               \n\033[0m'
 }
 
 show_banner
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 
-echo -e "${BLUE}Installation de OhMyObsidian...${RESET}"
+echo -e "${BLUE}:: Installation de OhMyObsidian...${RESET}"
 
 # Turn off untrusted repo protection
 cd "$SCRIPTS_REPO_PATH"
@@ -59,7 +60,7 @@ if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
   termux-reload-settings > /dev/null 2>&1
 fi
 
-clear
+show_banner
 
 # Create SSH keys
 if [ ! -f ~/.ssh/id_rsa ]; then
@@ -76,6 +77,7 @@ if [ ! -f ~/.ssh/id_rsa ]; then
     echo -e "${BLUE}Copiez la clé ci-dessus (en ${YELLOW}jaune${BLUE}) et collez-la dans les paramètres d'authentification des clés SSH de votre hôte Git.${RESET}"
   fi
 else
+  show_banner
   echo -e "$YELLOW"
   cat ~/.ssh/id_rsa.pub
   echo -e "\n${BLUE}Voici votre clé SSH (ci-dessus en ${YELLOW}jaune${BLUE}) au cas où vous voudriez la copier.${RESET}"
@@ -125,6 +127,7 @@ git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
 
 if [ -z "$git_name" ]; then
+  echo
   read -p "Entrez votre git user.name : " git_name
   git config --global user.name "$git_name" > /dev/null 2>&1
 fi
