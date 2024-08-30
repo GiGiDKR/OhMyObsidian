@@ -63,7 +63,7 @@ check_and_install_gum
 show_banner
 
 if $USE_GUM; then
-    if gum confirm --prompt.foreground="33" --selected.background="33" "Changer de dépôt Termux ?"; then
+    if gum confirm --prompt.foreground="33" --selected.background="33" "    Changer de dépôt Termux ?"; then
         termux-change-repo
     fi
 else
