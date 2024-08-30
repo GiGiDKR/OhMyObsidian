@@ -5,9 +5,9 @@ show_banner() {
     echo -e '\n\033[44;97m               OBSIDIANSYNC               \n\033[0m'
 }
 
-show_banner
-
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
+
+show_banner
 
 echo -e "${BLUE}:: Installation de OhMyObsidian...${RESET}"
 
