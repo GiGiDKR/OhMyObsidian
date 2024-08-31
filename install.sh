@@ -107,7 +107,11 @@ fi
 
 REPO_PATH="$HOME/storage/shared/Documents/Repository/OhMyObsidian"
 if [ -d "$REPO_PATH" ]; then
-    echo -e "${TEXT_COLOR}Dépôt OhMyObsidian déjà existant${RESET_COLOR}"
+    if $USE_GUM; then
+        gum style --foreground 33 "Dépôt OhMyObsidian déjà existant"
+    else
+        echo -e "${TEXT_COLOR}Dépôt OhMyObsidian déjà existant${RESET_COLOR}"
+    fi
 else
     if $USE_GUM; then
         gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Clonage du dépôt OhMyObsidian" -- git clone https://github.com/GiGiDKR/OhMyObsidian.git "$REPO_PATH"
