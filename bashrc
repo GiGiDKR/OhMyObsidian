@@ -5,6 +5,7 @@ alias gc="git clone"
 alias n="nano"
 alias q="exit"
 alias c="clear"
+alias ..="cd .."
 
 export PATH="${PATH}:/data/data/com.termux/files/home"
 
@@ -27,6 +28,7 @@ alias sbashrc="source /data/data/com.termux/files/usr/etc/bash.bashrc"
 alias repos="cd $REPOS_PATH"
 alias csetup="cp $SCRIPTS_REPO_PATH/setup $HOME/OhMyObsidian/"
 alias storage="cd $STORAGE_PATH"
+alias obsidian="cd $OBSIDIAN_DIR_PATH"
 
 export RESET="\033[0m"
 export GREEN="\033[1;32m"
