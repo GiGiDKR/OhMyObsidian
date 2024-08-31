@@ -1,0 +1,282 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+TEXT_COLOR='\033[34m'
+RESET_COLOR='\033[0m'
+
+USE_GUM=false
+
+for arg in "$@"; do
+    case $arg in
+        --gum|-g)
+            USE_GUM=true
+            shift
+            ;;
+    esac
+done
+
+bash_banner() {
+    clear
+    echo -e '\n\033[44;97m               OBSIDIANSYNC               \n\033[0m'
+}
+
+show_banner() {
+    clear
+    if $USE_GUM; then
+        gum style \
+            --foreground 33 \
+            --border-foreground 33 \
+            --border double \
+            --align center \
+            --width 40 \
+            --margin "1 1 1 0" \
+            "" "OBSIDIANSYNC" ""
+    else
+        bash_banner
+    fi
+}
+
+check_and_install_gum() {
+    if $USE_GUM && ! command -v gum &> /dev/null; then
+        bash_banner
+        echo -e "${TEXT_COLOR}:: Installation de gum...${RESET_COLOR}"
+        pkg update -y > /dev/null 2>&1 && pkg install gum -y > /dev/null 2>&1
+    fi
+}
+
+finish() {
+    local ret=$?
+    if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
+        echo
+        if $USE_GUM; then
+            gum style --foreground 196 "ERREUR: Installation de OhMyObsidian impossible."
+        else
+            echo -e "\e[38;5;196mERREUR: Installation de OhMyObsidian impossible.\e[0m"
+        fi
+        echo -e "\e[38;5;33mVeuillez vous référer au(x) message(s) d'erreur ci-dessus.\e[0m"
+    fi
+}
+
+trap finish EXIT
+
+check_and_install_gum
+show_banner
+
+source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
+
+if $USE_GUM; then
+    gum style --foreground 33 ":: Installation de OhMyObsidian..."
+else
+    echo -e "${TEXT_COLOR}:: Installation de OhMyObsidian...${RESET_COLOR}"
+fi
+
+# Turn off untrusted repo protection
+cd "$SCRIPTS_REPO_PATH"
+existing_dirs=$(git config --global --get-all safe.directory)
+
+if [[ ! $existing_dirs == *"*"* ]]; then
+    if $USE_GUM; then
+        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Configuration Git -- Ajout de safe.directory" -- git config --global --add safe.directory "*"
+    else
+        echo 'Exécution de git config --global --add safe.directory "*"'
+        git config --global --add safe.directory "*" > /dev/null 2>&1
+    fi
+fi
+
+# Update scripts repo
+cd "$SCRIPTS_REPO_PATH"
+if $USE_GUM; then
+    gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts -- git fetch" -- git fetch
+else
+    echo 'Exécution de git fetch...'
+    git fetch > /dev/null 2>&1
+fi
+
+git_status=$(git status)
+
+if [[ "$git_status" == *"Your branch is behind"* ]]; then
+  if [[ "$git_status" == *"Changes not staged for commit"* || "$git_status" == *"Changes to be committed"* ]]; then
+    if $USE_GUM; then
+        gum style --foreground 196 "Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Continuer le script..."
+    else
+        echo -e "${RED}Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Continuer le script...${RESET}"
+    fi
+  else
+    if $USE_GUM; then
+        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts -- git pull" -- git pull -q
+    else
+        echo 'Exécution de git pull...'
+        git pull -q > /dev/null 2>&1
+    fi
+    
+    if [ $? -eq 0 ]; then
+      if $USE_GUM; then
+          gum style --foreground 34 "Le dépôt de scripts a été mis à jour !"
+      else
+          echo -e "${GREEN}Le dépôt de scripts a été mis à jour !${RESET}"
+      fi
+    else
+      if $USE_GUM; then
+          gum style --foreground 196 "Échec de la mise à jour du dépôt de scripts."
+      else
+          echo -e "${RED}Échec de la mise à jour du dépôt de scripts.${RESET}"
+      fi
+      exit 1
+    fi
+
+    # Check if 'setup' file in repo is different from the one in $HOME/OhMyObsidian
+    if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
+        cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
+        echo -e "$cmd" | termux-clipboard-set
+        if $USE_GUM; then
+            gum style --foreground 196 "Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${cmd}"
+            gum style --foreground 196 "Sortie du script."
+        else
+            echo -e "${RED}Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${YELLOW}${cmd}${RESET}"
+            echo -e "${RED}Sortie du script.${RESET}"
+        fi
+        exit 1
+    fi
+  fi
+fi
+
+# Make sure Termux has file permissions
+if touch "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1; then
+  rm "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1
+else
+  if $USE_GUM; then
+      gum style --foreground 196 "Termux n'a pas les permissions de fichier."
+      gum style --foreground 33 "Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android."
+  else
+      echo -e "${RED}Termux n'a pas les permissions de fichier.${RESET}"
+      echo -e "${BLUE}Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
+  fi
+fi
+
+# Enable allow-external-apps
+if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
+  if $USE_GUM; then
+      gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Activation des applications externes" -- sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
+  else
+      echo 'Activation des applications externes...'
+      sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties > /dev/null 2>&1
+  fi
+  termux-reload-settings > /dev/null 2>&1
+fi
+
+show_banner
+
+# Create SSH keys
+if [ ! -f ~/.ssh/id_rsa ]; then
+  if $USE_GUM; then
+      gum style --foreground 33 "Création d'une clé SSH..."
+  else
+      echo -e "${BLUE}Création d'une clé SSH...${RESET}"
+  fi
+  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null 2>&1
+
+  if cat ~/.ssh/id_rsa.pub | termux-clipboard-set; then
+    if $USE_GUM; then
+        gum style --foreground 33 "La clé publique SSH a été copiée dans votre presse-papiers."
+        gum style --foreground 33 "Veuillez la coller dans les paramètres d'authentification des clés SSH de votre hôte Git."
+    else
+        echo -e "${BLUE}La clé publique SSH a été copiée dans votre presse-papiers.${RESET}"
+        echo -e "${BLUE}Veuillez la coller dans les paramètres d'authentification des clés SSH de votre hôte Git.${RESET}"
+    fi
+  else
+    echo -e "$YELLOW"
+    cat ~/.ssh/id_rsa.pub
+    echo -e "\n$RESET"
+    if $USE_GUM; then
+        gum style --foreground 33 "Copiez la clé ci-dessus (en jaune) et collez-la dans les paramètres d'authentification des clés SSH de votre hôte Git."
+    else
+        echo -e "${BLUE}Copiez la clé ci-dessus (en ${YELLOW}jaune${BLUE}) et collez-la dans les paramètres d'authentification des clés SSH de votre hôte Git.${RESET}"
+    fi
+  fi
+else
+  show_banner
+  echo -e "$YELLOW"
+  cat ~/.ssh/id_rsa.pub
+  echo -e "\n${BLUE}Voici votre clé SSH (ci-dessus en ${YELLOW}jaune${BLUE}) au cas où vous voudriez la copier.${RESET}"
+fi
+
+# Copy and chmod scripts to $HOME/OhMyObsidian
+DEST_DIR="$HOME/OhMyObsidian"
+
+for file in "$SCRIPTS_REPO_PATH"/*; do
+  filename=$(basename -- "$file")
+  if $USE_GUM; then
+      gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Copie des fichiers -- $filename" -- cp "$file" "$DEST_DIR/"
+  else
+      echo "Copie de $filename..."
+      cp "$file" "$DEST_DIR/" > /dev/null 2>&1
+  fi
+  chmod +x "$DEST_DIR/$filename" > /dev/null 2>&1
+done
+
+# Define configuration files
+
+BASHRC_FILE="/data/data/com.termux/files/usr/etc/bash.bashrc"
+ZSHRC_FILE="$HOME/.zshrc"
+
+declare -a LINES_TO_ADD=(
+  "source $SCRIPTS_REPO_PATH/bashrc # obsidian-sync-source-tag"
+)
+
+modify_or_add_line_with_tag() {
+  local line=$1
+  local file=$2
+  local tag=$(echo "$line" | awk -F'#' '{print $2}')
+
+  sed -i "/$tag/d" "$file" > /dev/null 2>&1
+  echo "$line" >> "$file"
+}
+
+# Add to bash.bashrc
+for line in "${LINES_TO_ADD[@]}"; do
+  modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
+done
+
+# If zsh is installed, add to .zshrc 
+if command -v zsh > /dev/null 2>&1; then
+  for line in "${LINES_TO_ADD[@]}"; do
+    modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
+  done
+fi
+
+git_name=$(git config --global user.name)
+git_email=$(git config --global user.email)
+
+if [ -z "$git_name" ]; then
+  echo
+  if $USE_GUM; then
+    git_name=$(gum input --placeholder "Entrez votre git user.name")
+  else
+    read -p "Entrez votre git user.name : " git_name
+  fi
+  git config --global user.name "$git_name" > /dev/null 2>&1
+fi
+
+if [ -z "$git_email" ]; then
+  if $USE_GUM; then
+    git_email=$(gum input --placeholder "Entrez votre git user.email")
+  else
+    read -p "Entrez votre git user.email : " git_email
+  fi
+  git config --global user.email "$git_email" > /dev/null 2>&1
+fi
+
+# Git config
+git config --global core.editor nano > /dev/null 2>&1
+git config --global merge.conflictstyle diff3 > /dev/null 2>&1
+
+# Create and access the Obsidian directory
+touch $NOTIFICATION_PATH > /dev/null 2>&1
+
+mkdir -p $OBSIDIAN_DIR_PATH > /dev/null 2>&1
+cd $OBSIDIAN_DIR_PATH
+
+if $USE_GUM; then
+    gum style --foreground 34 "Configuration terminée"
+else
+    echo -e "\n${GREEN}Configuration terminée${RESET}\n"
+fi
