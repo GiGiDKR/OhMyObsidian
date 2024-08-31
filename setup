@@ -3,16 +3,7 @@
 TEXT_COLOR='\033[34m'
 RESET_COLOR='\033[0m'
 
-USE_GUM=false
-
-for arg in "$@"; do
-    case $arg in
-        --gum|-g)
-            USE_GUM=true
-            shift
-            ;;
-    esac
-done
+USE_GUM=${USE_GUM:-false}
 
 bash_banner() {
     clear
