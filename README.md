@@ -4,7 +4,7 @@
 > [French version of README.md](README-FR.md)
 
 Easily sync your [Obsidian](https://github.com/obsidianmd/obsidian-releases] vaults on Android using Git (SSH) + [Termux](https://github.com/termux/termux-app).
-Automation and shortcuts using Tasker which works whether a vault is open or not to synchronize it. [^1]
+Automation and shortcuts using [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) which works whether a vault is open or not to synchronize it. [^1]
 
 To prevent conflicts, add the following lines to your **.gitignore** file in all your vaults that you'll be syncing using Git. If you notice a plugin has a file which is often in conflict, you'll want to add that as well (remember to un-track it with **`git rm --cached <file>`**):
 ```gitignore
@@ -58,7 +58,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 ```
 3. The above command copied an SSH public key to your clipboard (or was displayed to the screen), paste this into your Git host's SSH key authentication setting (eg [Github](https://github.com/settings/keys)). If you want to copy the SSH key again, run the **`setup`** script again.
 
-4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name.
+4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you can clone your Obsidian vaults. Try not to put any special characters in your vault name.
 
 - Obsidian documentation in Markdown format is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/en).
 
@@ -93,7 +93,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 1. Install [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) from the Play Store.
 2. Install [F-Droid](https://f-droid.org/en/).
-3. Install [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) and [Termux:API](https://f-droid.org/en/packages/com.termux.api/) from F-Droid (or from Obtainium : [Tasker](https://github.com/termux/termux-tasker) / [API](https://github.com/termux/termux-api))
+3. Install [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) and [Termux:API](https://f-droid.org/en/packages/com.termux.api/) from F-Droid (or Obtainium : [Tasker](https://github.com/termux/termux-tasker) / [Termux:API](https://github.com/termux/termux-api))
 2. Enable the Termux permission in the Android settings of the Tasker app.
 3. Open the Obsidian app and add your vaults from the **`Obsidian`** folder.
 4. If you're using the Obsidian Git plugin, you should disable it for this device. You can do this in the plugin settings.
@@ -119,6 +119,6 @@ All vaults will sync at 4am every day using a Tasker profile.
 - **1.0** : Initial version (adapted from [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
 - **1.0.1** : Added zsh-friendly configuration
 - **1.0.2** : French translation 
-- **1.0.3** : Added a [script](install.sh) to automate installation
-- **1.0.4** : Added ability to use gum for script interface 
-- **1.1** : WIP
+- **1.0.3** : Added a automated [script](install.sh)
+- **1.0.4** : Added ability to use [gum](https://github.com/charmbracelet/gum)
+- **1.1** : In development...
