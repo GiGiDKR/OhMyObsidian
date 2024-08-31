@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 
 TEXT_COLOR='\033[34m'
 RESET_COLOR='\033[0m'
