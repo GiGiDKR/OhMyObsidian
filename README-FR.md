@@ -50,13 +50,13 @@ mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
 git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents/Repository/OhMyObsidian
 ```
 > [!WARNING]
-> Soyez conscient que l'étape suivante définira [safe.directory](https://git-scm.com/docs/git-config/2.35.2#Documentation/git-config.txt-safedirectory) sur '*'
+> L'étape suivante définira [safe.directory](https://git-scm.com/docs/git-config/2.35.2#Documentation/git-config.txt-safedirectory) sur '*'
 
 2. Exécutez le script de configuration :
 ```bash
 cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/ && chmod +x "$HOME/OhMyObsidian/setup" && source "$HOME/OhMyObsidian/setup"
 ```
-3. La commande ci-dessus a copié une clé publique SSH dans votre presse-papiers (ou l'a affichée à l'écran), collez-la dans le paramètre d'authentification de clé SSH de votre hôte Git (par exemple [Github](https://github.com/settings/keys)). Si vous souhaitez copier à nouveau la clé SSH, exécutez à nouveau le script **`setup`**.
+3. La commande ci-dessus copie une clé publique SSH dans votre presse-papiers (ou l'affiche à l'écran), collez-la dans le gestionnaire d'authentification de clé SSH de votre hôte Git (par exemple [GitHub](https://github.com/settings/keys)). Si vous souhaitez copier à nouveau la clé SSH, exécutez à nouveau le script **`setup`**.
 
 4. Dans Termux, vous devriez maintenant être dans le répertoire Obsidian (vérifiez avec **`pwd`**) où vous devriez cloner vos coffres Obsidian. Essayez de ne pas mettre de caractères spéciaux dans le nom de votre coffre.
 
