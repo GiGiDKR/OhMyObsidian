@@ -1,4 +1,4 @@
-# OhMyObsidian
+# OhMyObsidian 📑
 
 > [!NOTE]
 > [French version of README.md](README-FR.md)
