@@ -114,18 +114,19 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
       exit 1
     fi
 
-    show_banner
 
     # Check if 'setup' file in repo is different from the one in $HOME/OhMyObsidian
     if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
         cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
         if $USE_GUM; then
+            show_banner
             gum style --foreground 196 "Le fichier 'setup' a été mis à jour."
             gum style --foreground 196 "Exécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :"
             gum style --foreground 196 "${cmd}"
             gum style --foreground 196 "Sortie du script."
         else
+            show_banner
             echo -e "${RED}Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${YELLOW}${cmd}${RESET}"
             echo -e "${RED}Sortie du script.${RESET}"
         fi
@@ -151,13 +152,7 @@ fi
 
 # Enable allow-external-apps
 if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
-  show_banner
-  if $USE_GUM; then
-      gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Activation des applications externes" -- sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
-  else
-      echo 'Activation des applications externes...'
       sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
-  fi
   termux-reload-settings
 fi
 
@@ -267,6 +262,7 @@ git config --global merge.conflictstyle diff3
 touch $NOTIFICATION_PATH
 
 mkdir -p $OBSIDIAN_DIR_PATH
+
 cd $OBSIDIAN_DIR_PATH
 
 if $USE_GUM; then
