@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
+
 TEXT_COLOR='\033[34m'
 RESET_COLOR='\033[0m'
 
@@ -43,8 +45,6 @@ trap finish EXIT
 
 show_banner
 
-source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
-
 if $USE_GUM; then
     gum style --foreground 33 ":: Installation de OhMyObsidian..."
 else
@@ -78,14 +78,16 @@ git_status=$(git status)
 if [[ "$git_status" == *"Your branch is behind"* ]]; then
   if [[ "$git_status" == *"Changes not staged for commit"* || "$git_status" == *"Changes to be committed"* ]]; then
     if $USE_GUM; then
-        gum style --foreground 196 "Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Continuer le script..."
+        gum style --foreground 196 "Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez que vous manquez des mises à jour. Continuer le script..."
     else
-        echo -e "${RED}Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Continuer le script...${RESET}"
+        echo -e "${RED}Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez que vous manquez des mises à jour. Continuer le script...${RESET}"
     fi
   else
     if $USE_GUM; then
+        show_banner 
         gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts" -- git pull -q
     else
+        show_banner
         echo 'Mise à jour du dépôt de scripts...'
         git pull -q > /dev/null 2>&1
     fi
@@ -110,14 +112,13 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
     if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
         cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
+        show_banner
         if $USE_GUM; then
-            show_banner
             gum style --foreground 196 "Le fichier 'setup' a été mis à jour."
             gum style --foreground 196 "Exécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :"
             gum style --foreground 196 "${cmd}"
             gum style --foreground 196 "Sortie du script."
         else
-            show_banner
             echo -e "${RED}Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${YELLOW}${cmd}${RESET}"
             echo -e "${RED}Sortie du script.${RESET}"
         fi
@@ -129,16 +130,15 @@ fi
 # Make sure Termux has file permissions
 if touch "$STORAGE_PATH"/.termux_permission_check; then
   rm "$STORAGE_PATH"/.termux_permission_check
-else
-  if $USE_GUM; then
-      show_banner
-      gum style --foreground 196 "Termux n'a pas les permissions de fichier."
-      gum style --foreground 33 "Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android."
   else
-      show_banner
-      echo -e "${RED}Termux n'a pas les permissions de fichier.${RESET}"
-      echo -e "${BLUE}Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
-  fi
+    show_banner
+    if $USE_GUM; then
+        gum style --foreground 196 "Termux n'a pas les permissions de fichier."
+        gum style --foreground 33 "Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android."
+    else
+        echo -e "${RED}Termux n'a pas les permissions de fichier.${RESET}"
+        echo -e "${BLUE}Exécutez 'term nux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
+    fi
 fi
 
 # Enable allow-external-apps
@@ -216,8 +216,6 @@ for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
 
-source $BASHRC_FILE
-
 # If zsh is installed, add to .zshrc 
 if command -v zsh; then
   for line in "${LINES_TO_ADD[@]}"; do
@@ -258,8 +256,6 @@ git config --global merge.conflictstyle diff3
 # Create and access the Obsidian directory
 touch $NOTIFICATION_PATH
 
-mkdir -p $OBSIDIAN_DIR_PATH
-
 cd $OBSIDIAN_DIR_PATH
 
 if $USE_GUM; then
@@ -267,3 +263,5 @@ if $USE_GUM; then
 else
     echo -e "\n${GREEN}Configuration terminée !${RESET}\n"
 fi
+
+cd $OBSIDIAN_DIR_PATH
