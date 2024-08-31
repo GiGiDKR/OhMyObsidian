@@ -1,6 +1,6 @@
 # OhMyObsidian 📑
 
-Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Automatisez et créez des raccourcis avec Tasker, synchronisant que le coffre soit ouvert ou non. [^1]
+Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Créez des raccourcis avec Tasker et automatisez la synchronisation que le coffre soit ouvert ou non. [^1]
 
 Pour éviter les conflits, ajoutez les lignes suivantes à votre fichier **.gitignore** dans tous les coffres que vous synchroniserez avec Git. Si vous remarquez qu'un plugin a un fichier qui est souvent en conflit, l'ajouter également (n'oubliez pas de le retirer du suivi avec **`git rm --cached <file>`**) :
 
@@ -11,7 +11,7 @@ Pour éviter les conflits, ajoutez les lignes suivantes à votre fichier **.giti
 /conflict-files-obsidian-git.md
 ```
 
-Pour éviter les conflits avec vos fichiers de notes, vous pouvez créer un fichier **.gitattributes** à la racine de vos coffres avec le contenu suivant. Cela acceptera toujours les deux modifications pour les fichiers **`.md`**.
+Pour éviter les conflits avec vos fichiers de notes, vous pouvez créer un fichier **.gitattributes** à la racine de vos coffres avec le contenu suivant**.
 
 ```gitattributes
 *.md merge=union
@@ -25,7 +25,7 @@ Pour éviter les conflits avec vos fichiers de notes, vous pouvez créer un fich
 ## Configuration de la synchronisation Obsidian
 
 > [!IMPORTANT]
-> Un script d'installation complet est disponible avec l'utilisation optionnelle de [gum](https://github.com/charmbracelet/gum) pour obtenir une interface de script plus propre et plus belle.
+> Un script d'installation complet est disponible avec l'utilisation optionnelle de [gum](https://github.com/charmbracelet/gum) pour obtenir une interface de script plus propre.
 > Pour l'exécuter, entrez :
 > ```bash
 > curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
@@ -34,7 +34,7 @@ Pour éviter les conflits avec vos fichiers de notes, vous pouvez créer un fich
 
 ### Installation manuelle
 
-- **Optionnel** : Pour installer / mettre à jour les paquets, vous pouvez sélectionner un dépôt particulier pour augmenter la vitesse de téléchargement : `termux-change-repo`
+- **Optionnel** : Pour installer / mettre à jour les paquets, vous pouvez sélectionner un autre dépôt afin d'augmenter la vitesse de téléchargement : `termux-change-repo`
 
 1. Exécutez les commandes suivantes :
 ```bash
@@ -56,14 +56,14 @@ git clone https://github.com/GiGiDKR/OhMyObsidian.git ~/storage/shared/Documents
 ```bash
 cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/ && chmod +x "$HOME/OhMyObsidian/setup" && source "$HOME/OhMyObsidian/setup"
 ```
-3. La commande ci-dessus copie une clé publique SSH dans votre presse-papiers (ou l'affiche à l'écran), collez-la dans le gestionnaire d'authentification de clé SSH de votre hôte Git (par exemple [GitHub](https://github.com/settings/keys)). Si vous souhaitez copier à nouveau la clé SSH, exécutez à nouveau le script **`setup`**.
+3. La commande ci-dessus copie une clé publique SSH dans votre presse-papiers (ou l'affiche à l'écran), collez-la dans le gestionnaire d'authentification de clé SSH de votre hôte Git (par exemple [GitHub](https://github.com/settings/keys)). Si vous souhaitez copier à nouveau la clé SSH, ré-exécutez le script **`setup`**.
 
-4. Dans Termux, vous devriez maintenant être dans le répertoire Obsidian (vérifiez avec **`pwd`**) où vous devriez cloner vos coffres Obsidian. Essayez de ne pas mettre de caractères spéciaux dans le nom de votre coffre.
+4. Dans Termux, vous devriez maintenant être dans le répertoire Obsidian (vérifiez avec **`pwd`**) où vous pouvez cloner vos coffres Obsidian. Essayez de ne pas mettre de caractères spéciaux dans le nom de votre coffre.
 
 - La documentation d'Obsidian en format Markdown est disponible dans le [dépôt GitHub](https://github.com/obsidianmd/obsidian-help/tree/master/fr).
 
 > [!NOTE]
-> - Synchronisez tous les coffres dans le dossier Obsidian :
+> - Synchronisez tous les coffres du dossier Obsidian :
 > **`sync`**
 > - Obtenez le statut de la synchronisation du coffre :
 > **`status`** 
@@ -71,7 +71,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 > **`open`**
 
 > [!TIP]
-> Par défaut, Git ne se souvient pas de vos identifiants, mais il est possible de changer cela avec un Credential Helper :
+> Par défaut Git ne se souvient pas de vos identifiants, ce qu'il est possible de modfiier avec un Credential Helper :
 >
 > Se souvenir de vos identifiants pendant une session :
 > ```bash
@@ -88,23 +88,23 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 ## Configuration de Tasker [^1]
 
-[Voici une image](https://bit.ly/40hLIyt) de ce à quoi cela ressemble, une fois terminé avec des raccourcis vers certaines fonctions utilitaires optionnelles. Chaque coffre aura sa propre icône. Cela permet de rendre la synchronisation plus efficace car sans cela, tous les coffres se synchronisent chaque fois dans un ordre spécifique. Au lieu de cela, seul le coffre que vous ouvrez est synchronisé immédiatement. Si vous n'utilisez qu'un seul coffre ou si cela ne vous dérange pas d'attendre que le coffre que vous venez d'ouvrir soit mis à jour, vous pouvez utiliser l'icône par défaut de l'application Obsidian. De plus, tous les coffres sont synchronisés une fois par jour (par défaut à 4h du matin).
+[Voici une image](https://bit.ly/40hLIyt) de ce à quoi cela ressemble une fois terminé avec des raccourcis vers certaines fonctions utilitaires optionnelles. Chaque coffre aura sa propre icône. Cela permet de rendre la synchronisation plus efficace car sans cela, tous les coffres se synchronisent chaque fois dans un ordre spécifique. Au lieu de cela, seul le coffre que vous ouvrez est synchronisé immédiatement. Si vous n'utilisez qu'un seul coffre ou si cela ne vous dérange pas d'attendre que le coffre que vous venez d'ouvrir soit mis à jour, vous pouvez utiliser l'icône par défaut de l'application Obsidian. De plus, tous les coffres sont synchronisés une fois par jour (par défaut à 04H00).
 
 1. Installez [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) depuis le Play Store.
 2. Installez [F-Droid](https://f-droid.org/en/).
 3. Installez [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) et [Termux:API](https://f-droid.org/en/packages/com.termux.api/) depuis F-Droid (ou depuis Obtainium : [Tasker](https://github.com/termux/termux-tasker) / [API](https://github.com/termux/termux-api))
 2. Activez l'autorisation Termux dans les paramètres Android de l'application Tasker.
 3. Ouvrez l'application Obsidian et ajoutez vos coffres depuis le dossier **`Obsidian`**.
-4. Si vous utilisez le plugin Obsidian Git, vous devriez le désactiver pour cet appareil. Vous pouvez le faire dans les paramètres du plugin.
-5. Importez le "projet Tasker" dans Tasker. Une fois importé, je vous recommande de réorganiser les tâches selon [cette image](https://imgur.com/a/6Gj6aRj) pour plus de simplicité (pour réorganiser les tâches, maintenez une tâche, puis faites-la glisser). Vous pouvez importer le projet de 2 manières. Vous pouvez utiliser ce [lien TaskerNet](https://taskernet.com/shares/?user=AS35m8n3cQwLQVpqM%2Fik6LZsANJ%2F8SkOXbatTM3JXxEQY4KYaxES06TbTgTRcO7ziHKZXfzQKT1B&id=Project%3AObsidian+Syncing), ou vous pouvez importer ([image](https://imgur.com/a/Fvyl8HF)) le fichier .xml depuis ce dépôt. Une fois importé, il y aura des invites, je pense une pour donner à Tasker "l'accès à l'utilisation" et une pour activer tous les profils. Acceptez tout.
+4. Si vous utilisez le plugin Obsidian Git, vous devriez le désactiver pour cet appareil (depuis les paramètres du plugin).
+5. Importez le "Projet Tasker" dans Tasker. Une fois importé, je vous recommande de réorganiser les tâches selon [cette image](https://imgur.com/a/6Gj6aRj) pour plus de simplicité (pour réorganiser les tâches, maintenez une tâche, puis faites-la glisser). Vous pouvez importer le projet de 2 manières. Vous pouvez utiliser ce [lien TaskerNet](https://taskernet.com/shares/?user=AS35m8n3cQwLQVpqM%2Fik6LZsANJ%2F8SkOXbatTM3JXxEQY4KYaxES06TbTgTRcO7ziHKZXfzQKT1B&id=Project%3AObsidian+Syncing), ou vous pouvez importer ([image](https://imgur.com/a/Fvyl8HF)) le fichier .xml depuis ce dépôt. Une fois importé validez les invités s'affichant à l'écran.
 6. **Icônes de lancement de coffre** - Il y a 2 tâches exemples (Vault1 et Vault2). Renommez la tâche au nom de votre coffre (vous pouvez le nommer comme vous voulez). Ensuite, dans la tâche, vous verrez une action "Variable Set", changez la valeur en **nom du dossier** qui contient le dépôt pour ce coffre.
 7. Donnez à Termux l'autorisation "Afficher par-dessus d'autres applications".
-8. Ajoutez les icônes de lancement de coffre en tant que widgets Tasker (utilisez le type de widget qui vous permet de les ajouter à des dossiers) à l'écran d'accueil. Ajoutez également les 3 tâches d'aide en tant que widgets (au besoin) :
+8. Ajoutez les icônes de lancement de coffre en tant que widgets Tasker (utilisez le type de widget qui vous permet de les ajouter à des dossiers) à l'écran d'accueil. Si besoin ajoutez également les 3 tâches d'aide en tant que widgets :
    1. Sync Vaults   - synchronise tous les coffres
    2. Vaults Status - affiche le **`git fetch && git status`** de chaque coffre
    3. Sync Log      - affiche le journal de synchronisation.
 
-Tous les coffres seront synchronisés à 4h du matin chaque jour en utilisant un profil Tasker.
+Tous les coffres seront synchronisés à 04H00 chaque jour en utilisant un profil Tasker.
 
 [^1]: Ne pas utiliser pour le moment : adaptation à venir dans la v1.1
 
@@ -120,6 +120,6 @@ Tous les coffres seront synchronisés à 4h du matin chaque jour en utilisant un
 - **1.0** : Version initiale (adaptée de [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
 - **1.0.1** : Ajout de la configuration compatible zsh
 - **1.0.2** : Traduction française 
-- **1.0.3** : Ajout d'un [script](install.sh) pour automatiser l'installation
-- **1.0.4** : Ajout de la possibilité d'utiliser gum pour l'interface de script 
+- **1.0.3** : Ajout d'un [script](install.sh) d'installation automatisée.
+- **1.0.4** : Ajout de la possibilité d'utiliser [gum](https://github.com/charmbracelet/gum)
 - **1.1** : En cours de développement
