@@ -122,5 +122,5 @@ Tous les coffres seront synchronisés à 04H00 chaque jour en utilisant un profi
 - **1.0.2** : Traduction française 
 - **1.0.3** : Ajout d'un [script](install.sh) d'installation automatisée.
 - **1.0.4** : Ajout de la possibilité d'utiliser [gum](https://github.com/charmbracelet/gum)
-_ **1.0.5** : Code optimisé et débogué
+- **1.0.5** : Code optimisé et débogué
 - **1.1** : En cours de développement
