@@ -1,6 +1,6 @@
 # OhMyObsidian 📑
 
-Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Créez des raccourcis avec Tasker et automatisez la synchronisation que le coffre soit ouvert ou non. [^1]
+Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Créez des raccourcis avec [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) et automatisez la synchronisation que le coffre soit ouvert ou non. [^1]
 
 Pour éviter les conflits, ajoutez les lignes suivantes à votre fichier **.gitignore** dans tous les coffres que vous synchroniserez avec Git. Si vous remarquez qu'un plugin a un fichier qui est souvent en conflit, l'ajouter également (n'oubliez pas de le retirer du suivi avec **`git rm --cached <file>`**) :
 
@@ -92,7 +92,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 1. Installez [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) depuis le Play Store.
 2. Installez [F-Droid](https://f-droid.org/en/).
-3. Installez [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) et [Termux:API](https://f-droid.org/en/packages/com.termux.api/) depuis F-Droid (ou depuis Obtainium : [Tasker](https://github.com/termux/termux-tasker) / [API](https://github.com/termux/termux-api))
+3. Installez [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) et [Termux:API](https://f-droid.org/en/packages/com.termux.api/) depuis F-Droid (ou Obtainium : [Tasker](https://github.com/termux/termux-tasker) / [Termux:API](https://github.com/termux/termux-api))
 2. Activez l'autorisation Termux dans les paramètres Android de l'application Tasker.
 3. Ouvrez l'application Obsidian et ajoutez vos coffres depuis le dossier **`Obsidian`**.
 4. Si vous utilisez le plugin Obsidian Git, vous devriez le désactiver pour cet appareil (depuis les paramètres du plugin).
