@@ -124,9 +124,11 @@ fi
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
 if $USE_GUM; then
-    source "$HOME/OhMyObsidian/setup --gum"
+    export USE_GUM=true
 else
-    source "$HOME/OhMyObsidian/setup"
+    export USE_GUM=false
 fi
+
+source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
