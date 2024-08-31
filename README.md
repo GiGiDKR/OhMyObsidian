@@ -60,7 +60,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name.
 
-- Obsidian documentation is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/en).
+- Obsidian documentation in Markdown format is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/en).
 
 > [!NOTE]
 > - Sync all the vaults in the Obsidian folder :
