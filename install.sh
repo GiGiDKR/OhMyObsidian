@@ -123,6 +123,7 @@ fi
 
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
+
 if $USE_GUM; then
     export USE_GUM=true
 else
@@ -132,5 +133,3 @@ fi
 source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
-
-cd $OBSIDIAN_DIR_PATH
