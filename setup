@@ -26,14 +26,6 @@ show_banner() {
     fi
 }
 
-check_and_install_gum() {
-    if $USE_GUM && ! command -v gum &> /dev/null; then
-        bash_banner
-        echo -e "${TEXT_COLOR}:: Installation de gum...${RESET_COLOR}"
-        pkg update -y > /dev/null 2>&1 && pkg install gum -y > /dev/null 2>&1
-    fi
-}
-
 finish() {
     local ret=$?
     if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
@@ -49,7 +41,6 @@ finish() {
 
 trap finish EXIT
 
-check_and_install_gum
 show_banner
 
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
@@ -225,11 +216,17 @@ for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
 
+source $BASHRC_FILE
+
 # If zsh is installed, add to .zshrc 
 if command -v zsh; then
   for line in "${LINES_TO_ADD[@]}"; do
     modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
   done
+fi
+
+if command -v zsh; then
+  source $ZSHRC_FILE
 fi
 
 git_name=$(git config --global user.name)
