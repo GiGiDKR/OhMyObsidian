@@ -67,9 +67,9 @@ existing_dirs=$(git config --global --get-all safe.directory)
 
 if [[ ! $existing_dirs == *"*"* ]]; then
     if $USE_GUM; then
-        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Configuration Git Safe.Directory" -- git config --global --add safe.directory "*"
+        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Configuration Safe Directory" -- git config --global --add safe.directory "*"
     else
-        echo "Configuration Git Safe.Directory"
+        echo "Configuration Safe Directory"
         git config --global --add safe.directory "*"
     fi
 fi
@@ -78,9 +78,9 @@ show_banner
 # Update scripts repo
 cd "$SCRIPTS_REPO_PATH"
 if $USE_GUM; then
-    gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts -- git fetch" -- git fetch
+    gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts" -- git fetch
 else
-    echo 'Exécution de git fetch...'
+    echo 'Mise à jour du dépôt de scripts...'
     git fetch > /dev/null 2>&1
 fi
 
@@ -95,9 +95,9 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
     fi
   else
     if $USE_GUM; then
-        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts -- git pull" -- git pull -q
+        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Mise à jour du dépôt de scripts" -- git pull -q
     else
-        echo 'Exécution de git pull...'
+        echo 'Mise à jour du dépôt de scripts...'
         git pull -q > /dev/null 2>&1
     fi
     
@@ -116,12 +116,16 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
       exit 1
     fi
 
+    show_banner
+
     # Check if 'setup' file in repo is different from the one in $HOME/OhMyObsidian
     if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
         cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
         if $USE_GUM; then
-            gum style --foreground 196 "Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${cmd}"
+            gum style --foreground 196 "Le fichier 'setup' a été mis à jour.
+            gum style --foreground 196 "Exécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :"
+            gum style --foreground 196 "${cmd}"
             gum style --foreground 196 "Sortie du script."
         else
             echo -e "${RED}Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${YELLOW}${cmd}${RESET}"
@@ -137,9 +141,11 @@ if touch "$STORAGE_PATH"/.termux_permission_check; then
   rm "$STORAGE_PATH"/.termux_permission_check
 else
   if $USE_GUM; then
+      show_banner
       gum style --foreground 196 "Termux n'a pas les permissions de fichier."
       gum style --foreground 33 "Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android."
   else
+      show_banner
       echo -e "${RED}Termux n'a pas les permissions de fichier.${RESET}"
       echo -e "${BLUE}Exécutez 'termux-setup-storage' ou donnez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
   fi
@@ -147,6 +153,7 @@ fi
 
 # Enable allow-external-apps
 if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
+  show_banner
   if $USE_GUM; then
       gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Activation des applications externes" -- sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
   else
@@ -259,7 +266,7 @@ git config --global core.editor nano
 git config --global merge.conflictstyle diff3
 
 # Create and access the Obsidian directory
-touch $NOTIFICATION_PATH > /dev/null 2>&1
+touch $NOTIFICATION_PATH
 
 mkdir -p $OBSIDIAN_DIR_PATH
 cd $OBSIDIAN_DIR_PATH
