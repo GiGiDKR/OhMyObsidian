@@ -58,7 +58,9 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 ```
 3. The above command copied an SSH public key to your clipboard (or was displayed to the screen), paste this into your Git host's SSH key authentication setting (eg [Github](https://github.com/settings/keys)). If you want to copy the SSH key again, run the **`setup`** script again.
 
-4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name. Obsidian documentation is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/fr).
+4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name.
+
+Obsidian documentation is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/en).
 
 > [!NOTE]
 > - Sync all the vaults in the Obsidian folder :
