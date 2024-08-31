@@ -121,4 +121,5 @@ All vaults will sync at 4am every day using a Tasker profile.
 - **1.0.2** : French translation 
 - **1.0.3** : Added a automated [script](install.sh)
 - **1.0.4** : Added ability to use [gum](https://github.com/charmbracelet/gum)
+- **1.0.5** : Code improvement and debugging
 - **1.1** : In development...
