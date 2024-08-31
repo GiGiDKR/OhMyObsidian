@@ -61,25 +61,25 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name.
 
 > [!NOTE]
-> - To sync all the vaults in the Obsidian folder, run :
+> - Sync all the vaults in the Obsidian folder :
 > **`sync`**
-> - To get the status of the vault sync :
+> - Get the status of the vault sync :
 > **`status`** 
-> - To open Obsidian from Termux : 
+> - Open Obsidian from Termux : 
 > **`open`**
 
 > [!TIP]
 > By default Git does not remember your credentials but it is possible to change this with a Credential Helper :
 >
-> To remember your credentials during a session :
+> Remember your credentials during a session :
 > ```bash
 > git config --global credential.helper cache
 > ```
-> To remember during 1 hour :
+> Remember during 1 hour :
 > ```bash
 > git config --global credential.helper 'cache --timeout=3600'
 > ```
-> To remember permanently (less secure) :
+> Remember permanently (less secure) :
 > ```bash
 > git config --global credential.helper store
 > ```
