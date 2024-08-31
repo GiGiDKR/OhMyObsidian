@@ -99,10 +99,10 @@ for pkg in git openssh termux-api; do
 done
 
 if $USE_GUM; then
-    gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Création des répertoires nécessaires" -- mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
+    gum spin --spinner dot --spinner.foreground="33" --title.foreground="33" --title "Création des répertoires nécessaires" -- mkdir -p /storage/emulated/0/Documents/Repository/Obsidian $HOME/OhMyObsidian
 else
     echo -e "${TEXT_COLOR}:: Création des répertoires nécessaires${RESET_COLOR}"
-    mkdir -p /storage/emulated/0/Documents/Repository $HOME/OhMyObsidian
+    mkdir -p /storage/emulated/0/Documents/Repository/Obsidian $HOME/OhMyObsidian
 fi
 
 REPO_PATH="$HOME/storage/shared/Documents/Repository/OhMyObsidian"
