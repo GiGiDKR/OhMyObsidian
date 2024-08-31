@@ -133,3 +133,6 @@ fi
 source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
+
+exec bash
+cd $OBSIDIAN_DIR_PATH
