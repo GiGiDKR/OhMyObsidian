@@ -123,6 +123,10 @@ fi
 
 cp "$REPO_PATH/setup" "$HOME/OhMyObsidian/"
 chmod +x "$HOME/OhMyObsidian/setup"
-source "$HOME/OhMyObsidian/setup"
+if $USE_GUM; then
+    source "$HOME/OhMyObsidian/setup --gum"
+else
+    source "$HOME/OhMyObsidian/setup"
+fi
 
 rm "$0"
