@@ -3,7 +3,7 @@
 > [!NOTE]
 > [French version of README.md](README-FR.md)
 
-Easily sync your Obsidian vaults on Android using Git (SSH) + [Termux](https://github.com/termux/termux-app).
+Easily sync your [Obsidian](https://github.com/obsidianmd/obsidian-releases] vaults on Android using Git (SSH) + [Termux](https://github.com/termux/termux-app).
 Automation and shortcuts using Tasker which works whether a vault is open or not to synchronize it. [^1]
 
 To prevent conflicts, add the following lines to your **.gitignore** file in all your vaults that you'll be syncing using Git. If you notice a plugin has a file which is often in conflict, you'll want to add that as well (remember to un-track it with **`git rm --cached <file>`**):
@@ -58,7 +58,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 ```
 3. The above command copied an SSH public key to your clipboard (or was displayed to the screen), paste this into your Git host's SSH key authentication setting (eg [Github](https://github.com/settings/keys)). If you want to copy the SSH key again, run the **`setup`** script again.
 
-4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name.
+4. In Termux, you should now be in the Obsidian directory (verify with **`pwd`**) where you should clone your Obsidian vaults. Try not to put any special characters in your vault name. Obsidian documentation is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/fr).
 
 > [!NOTE]
 > - Sync all the vaults in the Obsidian folder :
