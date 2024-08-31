@@ -93,7 +93,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 
 1. Install [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker) from the Play Store.
 2. Install [F-Droid](https://f-droid.org/en/).
-3. Install [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) / [Termux:API](https://f-droid.org/en/packages/com.termux.api/) from F-Droid (or Obtainium : [Termux:Tasker](https://github.com/termux/termux-tasker) / [Termux:API](https://github.com/termux/termux-api))
+3. Install [Termux:Tasker](https://f-droid.org/en/packages/com.termux.tasker/) and [Termux:API](https://f-droid.org/en/packages/com.termux.api/) from F-Droid or install from Obtainium : [Termux:Tasker](https://github.com/termux/termux-tasker) / [Termux:API](https://github.com/termux/termux-api))
 2. Enable the Termux permission in the Android settings of the Tasker app.
 3. Open the Obsidian app and add your vaults from the **`Obsidian`** folder.
 4. If you're using the Obsidian Git plugin, you should disable it for this device. You can do this in the plugin settings.
