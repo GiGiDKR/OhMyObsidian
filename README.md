@@ -63,7 +63,7 @@ cp "/storage/emulated/0/Documents/Repository/OhMyObsidian/setup" ~/OhMyObsidian/
 - Obsidian documentation in Markdown format is available in the [GitHub repository](https://github.com/obsidianmd/obsidian-help/tree/master/en).
 
 > [!NOTE]
-> - Sync all the vaults in the Obsidian folder :
+> - Sync all the vaults in Obsidian folder :
 > **`sync`**
 > - Get the status of the vault sync :
 > **`status`** 
