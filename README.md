@@ -29,7 +29,7 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 > ```bash
 > curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
 > ```
-> **Add `--gum` or `-g` at the end of the command to use the [gum](https://github.com/charmbracelet/gum) interface**
+> 🎀 **Add `--gum` or `-g` at the end of the command to use the [gum](https://github.com/charmbracelet/gum) interface**
 
 ### Manual installation  
 
