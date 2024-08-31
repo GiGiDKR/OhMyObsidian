@@ -67,10 +67,10 @@ existing_dirs=$(git config --global --get-all safe.directory)
 
 if [[ ! $existing_dirs == *"*"* ]]; then
     if $USE_GUM; then
-        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Configuration Git -- Ajout de safe.directory" -- git config --global --add safe.directory "*"
+        gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Configuration Git Safe.Directory" -- git config --global --add safe.directory "*"
     else
-        echo 'Exécution de git config --global --add safe.directory "*"'
-        git config --global --add safe.directory "*" > /dev/null 2>&1
+        echo "Configuration Git Safe.Directory"
+        git config --global --add safe.directory "*"
     fi
 fi
 
@@ -133,8 +133,8 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
 fi
 
 # Make sure Termux has file permissions
-if touch "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1; then
-  rm "$STORAGE_PATH"/.termux_permission_check > /dev/null 2>&1
+if touch "$STORAGE_PATH"/.termux_permission_check; then
+  rm "$STORAGE_PATH"/.termux_permission_check
 else
   if $USE_GUM; then
       gum style --foreground 196 "Termux n'a pas les permissions de fichier."
@@ -151,9 +151,9 @@ if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
       gum spin --spinner dot --spinner.foreground='33' --title.foreground='33' --title "Activation des applications externes" -- sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
   else
       echo 'Activation des applications externes...'
-      sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties > /dev/null 2>&1
+      sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
   fi
-  termux-reload-settings > /dev/null 2>&1
+  termux-reload-settings
 fi
 
 show_banner
@@ -164,17 +164,20 @@ if [ ! -f ~/.ssh/id_rsa ]; then
   else
       echo -e "${BLUE}Création d'une clé SSH...${RESET}"
   fi
-  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null 2>&1
+  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 
   if cat ~/.ssh/id_rsa.pub | termux-clipboard-set; then
     if $USE_GUM; then
+        show_banner
         gum style --foreground 33 "La clé publique SSH a été copiée dans votre presse-papiers."
         gum style --foreground 33 "Veuillez la coller dans les paramètres d'authentification des clés SSH de votre hôte Git."
     else
+        show_banner
         echo -e "${BLUE}La clé publique SSH a été copiée dans votre presse-papiers.${RESET}"
         echo -e "${BLUE}Veuillez la coller dans les paramètres d'authentification des clés SSH de votre hôte Git.${RESET}"
     fi
   else
+    show_banner
     echo -e "$YELLOW"
     cat ~/.ssh/id_rsa.pub
     echo -e "\n$RESET"
@@ -196,8 +199,8 @@ DEST_DIR="$HOME/OhMyObsidian"
 
 for file in "$SCRIPTS_REPO_PATH"/*; do
   filename=$(basename -- "$file")
-  cp "$file" "$DEST_DIR/" > /dev/null 2>&1
-  chmod +x "$DEST_DIR/$filename" > /dev/null 2>&1
+  cp "$file" "$DEST_DIR/"
+  chmod +x "$DEST_DIR/$filename"
 done
 
 # Define configuration files
@@ -213,7 +216,7 @@ modify_or_add_line_with_tag() {
   local file=$2
   local tag=$(echo "$line" | awk -F'#' '{print $2}')
 
-  sed -i "/$tag/d" "$file" > /dev/null 2>&1
+  sed -i "/$tag/d" "$file"
   echo "$line" >> "$file"
 }
 
@@ -223,7 +226,7 @@ for line in "${LINES_TO_ADD[@]}"; do
 done
 
 # If zsh is installed, add to .zshrc 
-if command -v zsh > /dev/null 2>&1; then
+if command -v zsh; then
   for line in "${LINES_TO_ADD[@]}"; do
     modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
   done
@@ -235,34 +238,34 @@ git_email=$(git config --global user.email)
 if [ -z "$git_name" ]; then
   echo
   if $USE_GUM; then
-    git_name=$(gum input --placeholder "Entrez votre git user.name")
+    git_name=$(gum input --placeholder "Entrez votre nom d'utilisateur Git")
   else
-    read -p "Entrez votre git user.name : " git_name
+    read -p "Entrez votre nom d'utilisateur Git :" git_name
   fi
-  git config --global user.name "$git_name" > /dev/null 2>&1
+  git config --global user.name "$git_name"
 fi
 
 if [ -z "$git_email" ]; then
   if $USE_GUM; then
-    git_email=$(gum input --placeholder "Entrez votre git user.email")
+    git_email=$(gum input --placeholder "Entrez votre email Git")
   else
-    read -p "Entrez votre git user.email : " git_email
+    read -p "Entrez votre email Git : " git_email
   fi
-  git config --global user.email "$git_email" > /dev/null 2>&1
+  git config --global user.email "$git_email"
 fi
 
 # Git config
-git config --global core.editor nano > /dev/null 2>&1
-git config --global merge.conflictstyle diff3 > /dev/null 2>&1
+git config --global core.editor nano
+git config --global merge.conflictstyle diff3
 
 # Create and access the Obsidian directory
 touch $NOTIFICATION_PATH > /dev/null 2>&1
 
-mkdir -p $OBSIDIAN_DIR_PATH > /dev/null 2>&1
+mkdir -p $OBSIDIAN_DIR_PATH
 cd $OBSIDIAN_DIR_PATH
 
 if $USE_GUM; then
-    gum style --foreground 34 "Configuration terminée"
+    gum style --foreground 34 "Configuration terminée !"
 else
-    echo -e "\n${GREEN}Configuration terminée${RESET}\n"
+    echo -e "\n${GREEN}Configuration terminée !${RESET}\n"
 fi
