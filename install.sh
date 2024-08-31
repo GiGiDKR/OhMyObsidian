@@ -132,3 +132,5 @@ fi
 source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
+
+cd $OBSIDIAN_DIR_PATH
