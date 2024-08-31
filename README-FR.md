@@ -1,8 +1,8 @@
 # OhMyObsidian 📑
 
-Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Automatisez et créez des raccourcis avec Tasker, qui fonctionne que le coffre soit ouvert ou non, pour le synchroniser. [^1]
+Synchronisez facilement vos coffres [Obsidian](https://github.com/obsidianmd/obsidian-releases) sur Android en utilisant Git (SSH) + [Termux](https://github.com/termux/termux-app). Automatisez et créez des raccourcis avec Tasker, synchronisant que le coffre soit ouvert ou non. [^1]
 
-Pour éviter les conflits, ajoutez les lignes suivantes à votre fichier **.gitignore** dans tous les coffres que vous synchroniserez avec Git. Si vous remarquez qu'un plugin a un fichier qui est souvent en conflit, vous voudrez l'ajouter également (n'oubliez pas de le retirer du suivi avec **`git rm --cached <file>`**) :
+Pour éviter les conflits, ajoutez les lignes suivantes à votre fichier **.gitignore** dans tous les coffres que vous synchroniserez avec Git. Si vous remarquez qu'un plugin a un fichier qui est souvent en conflit, l'ajouter également (n'oubliez pas de le retirer du suivi avec **`git rm --cached <file>`**) :
 
 ```gitignore
 /.obsidian/workspace.json
