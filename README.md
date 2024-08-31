@@ -34,7 +34,7 @@ To stop conflicts from happening with your note files, you can create a **.gitat
 
 ### Manual installation  
 
-- **Optional** : To install / update packages you can select a particular repository to increase the speed of download, enter  `termux-change-repo`
+- **Optional** : To install / update packages you can select a particular repository to increase the speed of download : `termux-change-repo`
 
 1. Run the following commands :
 ```bash
