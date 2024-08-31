@@ -60,7 +60,6 @@ else
     echo -e "${TEXT_COLOR}:: Installation de OhMyObsidian...${RESET_COLOR}"
 fi
 
-show_banner
 # Turn off untrusted repo protection
 cd "$SCRIPTS_REPO_PATH"
 existing_dirs=$(git config --global --get-all safe.directory)
@@ -74,7 +73,6 @@ if [[ ! $existing_dirs == *"*"* ]]; then
     fi
 fi
 
-show_banner
 # Update scripts repo
 cd "$SCRIPTS_REPO_PATH"
 if $USE_GUM; then
@@ -123,7 +121,7 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
         cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
         if $USE_GUM; then
-            gum style --foreground 196 "Le fichier 'setup' a été mis à jour.
+            gum style --foreground 196 "Le fichier 'setup' a été mis à jour."
             gum style --foreground 196 "Exécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :"
             gum style --foreground 196 "${cmd}"
             gum style --foreground 196 "Sortie du script."
