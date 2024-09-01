@@ -263,6 +263,6 @@ fi
 cd $OBSIDIAN_DIR_PATH
 
 # Vérifier si zsh est le shell actif
-if [ -n "$ZSH_VERSION" ]; then
+if command -v zsh; then
     exec zsh
 fi
