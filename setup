@@ -91,7 +91,7 @@ if [[ "$git_status" == *"Your branch is behind"* ]]; then
         echo 'Mise à jour du dépôt de scripts...'
         git pull -q > /dev/null 2>&1
     fi
-    
+
     if [ $? -eq 0 ]; then
       if $USE_GUM; then
           gum style --foreground 34 "Le dépôt de scripts a été mis à jour !"
@@ -223,10 +223,6 @@ if command -v zsh; then
   done
 fi
 
-if command -v zsh; then
-  source $ZSHRC_FILE
-fi
-
 git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
 
@@ -265,3 +261,8 @@ else
 fi
 
 cd $OBSIDIAN_DIR_PATH
+
+# Vérifier si zsh est le shell actif
+if [ -n "$ZSH_VERSION" ]; then
+    exec zsh
+fi
