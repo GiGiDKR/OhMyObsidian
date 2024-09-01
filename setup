@@ -45,12 +45,6 @@ trap finish EXIT
 
 show_banner
 
-if $USE_GUM; then
-    gum style --foreground 33 ":: Installation de OhMyObsidian..."
-else
-    echo -e "${TEXT_COLOR}:: Installation de OhMyObsidian...${RESET_COLOR}"
-fi
-
 # Turn off untrusted repo protection
 cd "$SCRIPTS_REPO_PATH"
 existing_dirs=$(git config --global --get-all safe.directory)
