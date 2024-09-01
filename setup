@@ -249,10 +249,7 @@ fi
 git config --global core.editor nano
 git config --global merge.conflictstyle diff3
 
-# Create and access the Obsidian directory
 touch $NOTIFICATION_PATH
-
-cd $OBSIDIAN_DIR_PATH
 
 if $USE_GUM; then
     gum style --foreground 34 "Configuration terminée !"
@@ -262,7 +259,6 @@ fi
 
 cd $OBSIDIAN_DIR_PATH
 
-# Vérifier si zsh est le shell actif
 if command -v zsh; then
     exec zsh
 fi
