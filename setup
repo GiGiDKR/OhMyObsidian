@@ -118,6 +118,14 @@ for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
 
+# If zsh is installed, add to .zshrc
+
+if command -v zsh; then
+  for line in "${LINES_TO_ADD[@]}"; do
+    modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
+  done
+fi
+
 ### Make sure user.name and user.email is populated
 
 git_name=$(git config --global user.name)
