@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 
-### Turn off untrusted repo protection
+### Désactiver la protection des dépôts non fiables
 
 existing_dirs=$(git config --global --get-all safe.directory)
 
@@ -9,7 +9,7 @@ if [[ ! $existing_dirs == *"*"* ]]; then
     git config --global --add safe.directory "*"
 fi
 
-### Update scripts repo
+### Mettre à jour le dépôt de scripts
 
 cd "$SCRIPTS_REPO_PATH"
 git fetch > /dev/null
@@ -17,43 +17,43 @@ git_status=$(git status)
 
 if [[ "$git_status" == *"Your branch is behind"* ]]; then
   if [[ "$git_status" == *"Changes not staged for commit"* || "$git_status" == *"Changes to be committed"* ]]; then
-    echo -e "${RED}There are local changes in the scripts repo which would block a git pull. Just be aware that you're missing updates. Continuing script...${RESET}"
+    echo -e "${RED}Il y a des modifications locales dans le dépôt de scripts qui bloqueraient un git pull. Sachez simplement que vous manquez des mises à jour. Poursuite du script...${RESET}"
   else
     if git pull > /dev/null 2>&1; then
-      echo -e "${GREEN}Updated the scripts repo!${RESET}"
+      echo -e "${GREEN}Le dépôt de scripts a été mis à jour !${RESET}"
     else
-      echo -e "${RED}Failed to update the scripts repo.${RESET}"
+      echo -e "${RED}Échec de la mise à jour du dépôt de scripts.${RESET}"
       exit 1
     fi
 
-    # Check if 'setup' file in repo is different from the one in $HOME
+    # Vérifier si le fichier 'setup' dans le dépôt est différent de celui dans $HOME
     if ! diff "${SCRIPTS_REPO_PATH}/setup" "$HOME/OhMyObsidian/setup" > /dev/null; then
         cmd="cp \"${SCRIPTS_REPO_PATH}/setup\" \"${HOME}/OhMyObsidian/\""
         echo -e "$cmd" | termux-clipboard-set
-        echo -e "${RED}The 'setup' file has been updated.\nRun the following command to update it (it's already in your clipboard):\n${YELLOW}${cmd}${RESET}"
-        echo -e "${RED}Exiting script.${RESET}"
+        echo -e "${RED}Le fichier 'setup' a été mis à jour.\nExécutez la commande suivante pour le mettre à jour (elle est déjà dans votre presse-papiers) :\n${YELLOW}${cmd}${RESET}"
+        echo -e "${RED}Arrêt du script.${RESET}"
         exit 1
     fi
   fi
 fi
 
-### Make sure Termux has file permissions
+### S'assurer que Termux a les permissions de fichiers
 
 if touch "$STORAGE_PATH"/.termux_permission_check; then
   rm "$STORAGE_PATH"/.termux_permission_check
 else
-  echo -e "${RED}Termux does not have file permissions.${RESET}"
-  echo -e "${BLUE}Run 'termux-setup-storage' or give the permission from Termux's permissions menu on Android.${RESET}"
+  echo -e "${RED}Termux n'a pas les permissions de fichiers.${RESET}"
+  echo -e "${BLUE}Exécutez 'termux-setup-storage' ou accordez la permission depuis le menu des permissions de Termux sur Android.${RESET}"
 fi
 
-### Enable allow-external-apps
+### Activer allow-external-apps
 
 if grep -q '^# allow-external-apps = true' $HOME/.termux/termux.properties; then
   sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' $HOME/.termux/termux.properties
   termux-reload-settings
 fi
 
-### Install packages -- attempt
+### Installer les paquets -- tentative
 
 # package_installed() {
 #   dpkg -l | grep -q "$1"
@@ -61,33 +61,33 @@ fi
 
 # for pkg in git termux-api openssh; do
 #   if ! package_installed "$pkg"; then
-#     echo "Installing $pkg..."
+#     echo "Installation de $pkg..."
 #     apt-get install -y "$pkg"
 #   fi
 # done
 
-### Create SSH keys
+### Créer des clés SSH
 
 if [ ! -f ~/.ssh/id_rsa ]; then
-  echo -e "${BLUE}Creating an SSH key...${RESET}"
+  echo -e "${BLUE}Création d'une clé SSH...${RESET}"
   ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null
 
   if cat ~/.ssh/id_rsa.pub | termux-clipboard-set; then
-    echo -e "${BLUE}SSH public key has been copied to your clipboard.${RESET}"
-    echo -e "${BLUE}Please paste it into your Git host's SSH keys authentication settings.${RESET}"
+    echo -e "${BLUE}La clé publique SSH a été copiée dans votre presse-papiers.${RESET}"
+    echo -e "${BLUE}Veuillez la coller dans les paramètres d'authentification des clés SSH de votre hébergeur Git.${RESET}"
   else
     echo -e "$YELLOW"
     cat ~/.ssh/id_rsa.pub
     echo -e "\n$RESET"
-    echo -e "${BLUE}Copy the key above (in ${YELLOW}yellow${BLUE}) and paste it into your Git host's SSH keys authentication settings.${RESET}"
+    echo -e "${BLUE}Copiez la clé ci-dessus (en ${YELLOW}jaune${BLUE}) et collez-la dans les paramètres d'authentification des clés SSH de votre hébergeur Git.${RESET}"
   fi
 else
   echo -e "$YELLOW"
   cat ~/.ssh/id_rsa.pub
-  echo -e "\n${BLUE}Here's your SSH key (above in ${YELLOW}yellow${BLUE}) in case you want to copy it.${RESET}"
+  echo -e "\n${BLUE}Voici votre clé SSH (ci-dessus en ${YELLOW}jaune${BLUE}) au cas où vous voudriez la copier.${RESET}"
 fi
 
-### Copy and chmod scripts to $HOME
+### Copier et chmod les scripts vers $HOME
 
 DEST_DIR="$HOME/OhMyObsidian"
 
@@ -97,7 +97,7 @@ for file in "$SCRIPTS_REPO_PATH"/*; do
   chmod +x "$DEST_DIR/$filename"
 done
 
-### Add source to bashrc
+### Ajouter la source à bashrc
 
 BASHRC_FILE="/data/data/com.termux/files/usr/etc/bash.bashrc"
 
@@ -118,7 +118,7 @@ for line in "${LINES_TO_ADD[@]}"; do
   modify_or_add_line_with_tag "$line" "$BASHRC_FILE"
 done
 
-# If zsh is installed, add to .zshrc
+# Si zsh est installé, ajouter à .zshrc
 
 if command -v zsh; then
   for line in "${LINES_TO_ADD[@]}"; do
@@ -126,22 +126,22 @@ if command -v zsh; then
   done
 fi
 
-### Make sure user.name and user.email is populated
+### S'assurer que user.name et user.email sont remplis
 
 git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
 
 if [ -z "$git_name" ]; then
-  read -p "Enter your git user.name: " git_name
+  read -p "Entrez votre git user.name : " git_name
   git config --global user.name "$git_name"
 fi
 
- if [ -z "$git_email" ]; then
-  read -p "Enter your git user.email: " git_email
+if [ -z "$git_email" ]; then
+  read -p "Entrez votre git user.email : " git_email
   git config --global user.email "$git_email"
 fi
 
-### Git config
+### Configuration Git
 
 git config --global core.editor nano
 git config --global merge.conflictstyle diff3
@@ -152,4 +152,4 @@ touch $NOTIFICATION_PATH
 
 cd $OBSIDIAN_DIR_PATH
 
-echo -e "\n${GREEN}Setup complete${RESET}\n"
+echo -e "\n${GREEN}Configuration terminée${RESET}\n"
