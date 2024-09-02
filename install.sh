@@ -141,7 +141,7 @@ source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
 
-if command -v zsh; then
+if command -v zsh > /dev/null 2>&1; then
   exec zsh
 fi
 
