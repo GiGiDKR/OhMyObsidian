@@ -23,7 +23,7 @@ alias repos="cd $REPOS_PATH"
 alias csetup="cp $SCRIPTS_REPO_PATH/setup $HOME/OhMyObsidian/"
 alias storage="cd $STORAGE_PATH"
 
-cd "$REPOS_PATH"
+#cd "$REPOS_PATH"
 
 export RESET="\033[0m"
 export GREEN="\033[1;32m"
