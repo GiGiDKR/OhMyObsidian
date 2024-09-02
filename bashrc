@@ -17,6 +17,8 @@ export NOTIFICATION_PATH="$STORAGE_PATH/sync-error-notification"
 export LAST_SYNC_PATH="$HOME/OhMyObsidian/last_sync.log"
 
 alias sync="$HOME/OhMyObsidian/sync-vaults.sh --skip-pause"
+alias status="bash $HOME/OhMyObsidian/vaults-status.sh"
+alias open="bash $HOME/OhMyObsidian/open-vault.sh"
 alias bashrc="nano /data/data/com.termux/files/usr/etc/bash.bashrc"
 alias sbashrc="source /data/data/com.termux/files/usr/etc/bash.bashrc"
 alias repos="cd $REPOS_PATH"
