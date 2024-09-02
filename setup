@@ -225,7 +225,7 @@ if [ -z "$git_name" ]; then
   if $USE_GUM; then
     git_name=$(gum input --placeholder "Entrez votre nom d'utilisateur Git")
   else
-    read -p "Entrez votre nom d'utilisateur Git :" git_name
+    read -p "Entrez votre nom d'utilisateur Git : " git_name
   fi
   git config --global user.name "$git_name"
 fi
