@@ -4,7 +4,7 @@ source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 TEXT_COLOR='\033[34m'
 RESET_COLOR='\033[0m'
 
-USE_GUM=false
+USE_GUM=${USE_GUM:-false}
 
 for arg in "$@"; do
     case $arg in
