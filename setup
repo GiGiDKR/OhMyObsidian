@@ -1,6 +1,67 @@
 #!/data/data/com.termux/files/usr/bin/bash
 source /storage/emulated/0/Documents/Repository/OhMyObsidian/bashrc
 
+TEXT_COLOR='\033[34m'
+RESET_COLOR='\033[0m'
+
+USE_GUM=false
+
+for arg in "$@"; do
+    case $arg in
+        --gum|-g)
+            USE_GUM=true
+            shift
+            ;;
+    esac
+done
+
+bash_banner() {
+    clear
+    echo -e '\n\033[44;97m               OHMYOBSIDIAN               \n\033[0m'
+}
+
+show_banner() {
+    clear
+    if $USE_GUM; then
+        gum style \
+            --foreground 33 \
+            --border-foreground 33 \
+            --border double \
+            --align center \
+            --width 40 \
+            --margin "1 1 1 0" \
+            "" "OHMYOBSIDIAN" ""
+    else
+        bash_banner
+    fi
+}
+
+check_and_install_gum() {
+    if $USE_GUM && ! command -v gum &> /dev/null; then
+        bash_banner
+        echo -e "${TEXT_COLOR}:: Installation de gum...${RESET_COLOR}"
+        pkg update -y > /dev/null 2>&1 && pkg install gum -y > /dev/null 2>&1
+    fi
+}
+
+finish() {
+    local ret=$?
+    if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
+        echo
+        if $USE_GUM; then
+            gum style --foreground 196 "ERREUR: Installation de OhMyObsidian impossible."
+        else
+            echo -e "\e[38;5;196mERREUR: Installation de OhMyObsidian impossible.\e[0m"
+        fi
+        echo -e "\e[38;5;33mVeuillez vous référer au(x) message(s) d'erreur ci-dessus.\e[0m"
+    fi
+}
+
+trap finish EXIT
+
+check_and_install_gum
+show_banner
+
 ### Désactiver la protection des dépôts non fiables
 
 existing_dirs=$(git config --global --get-all safe.directory)
@@ -68,6 +129,8 @@ fi
 
 ### Créer des clés SSH
 
+show_banner
+
 if [ ! -f ~/.ssh/id_rsa ]; then
   echo -e "${BLUE}Création d'une clé SSH...${RESET}"
   ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa > /dev/null
@@ -122,7 +185,7 @@ done
 
 # Si zsh est installé, ajouter à .zshrc
 
-if command -v zsh; then
+if command -v zsh > /dev/null 2>&1; then
   for line in "${LINES_TO_ADD[@]}"; do
     modify_or_add_line_with_tag "$line" "$ZSHRC_FILE"
   done
