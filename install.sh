@@ -138,7 +138,6 @@ rm "$0"
 
 if command -v zsh; then
   exec zsh
-  done
 fi
 
 cd $OBSIDIAN_DIR_PATH
