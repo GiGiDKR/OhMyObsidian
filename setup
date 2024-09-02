@@ -100,6 +100,7 @@ done
 ### Ajouter la source à bashrc
 
 BASHRC_FILE="/data/data/com.termux/files/usr/etc/bash.bashrc"
+ZSHRC_FILE="$HOME/.zshrc"
 
 declare -a LINES_TO_ADD=(
   "source $SCRIPTS_REPO_PATH/bashrc # obsidian-sync-source-tag"
