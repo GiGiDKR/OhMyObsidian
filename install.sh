@@ -130,9 +130,11 @@ else
     export USE_GUM=false
 fi
 
+cd $OBSIDIAN_DIR_PATH
+
 source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
 
-exec bash
-cd $OBSIDIAN_DIR_PATH
+#exec bash
+#cd $OBSIDIAN_DIR_PATH
