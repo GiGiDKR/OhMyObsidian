@@ -112,6 +112,7 @@ modify_or_add_line_with_tag() {
   local tag=$(echo "$line" | awk -F'#' '{print $2}')
 
   sed -i "/$tag/d" "$file"
+  echo >> "$file"  # Ajoute un retour à la ligne
   echo "$line" >> "$file"
 }
 
