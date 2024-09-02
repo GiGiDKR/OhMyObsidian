@@ -136,5 +136,9 @@ source "$HOME/OhMyObsidian/setup"
 
 rm "$0"
 
-#exec bash
-#cd $OBSIDIAN_DIR_PATH
+if command -v zsh; then
+  exec zsh
+  done
+fi
+
+cd $OBSIDIAN_DIR_PATH
