@@ -117,10 +117,10 @@ Tous les coffres seront synchronisés à 04H00 chaque jour en utilisant un profi
 
 ## Historique des versions
 
-- **1.0** : Version initiale (adaptée de [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync)
-- **1.0.1** : Ajout de la configuration compatible zsh
-- **1.0.2** : Traduction française 
-- **1.0.3** : Ajout d'un [script](install.sh) d'installation automatisée.
-- **1.0.4** : Ajout de la possibilité d'utiliser [gum](https://github.com/charmbracelet/gum)
-- **1.0.5** : Code optimisé et débogué
-- **1.1** : En cours de développement
+- 1.0 : Version initiale (adaptée de [Obsidian-Android-Sync](https://github.com/DovieW/obsidian-android-sync))
+- 1.0.1 : Ajout de la configuration compatible zsh
+- 1.0.2 : Traduction française 
+- 1.0.3 : Ajout d'un [script](install.sh) d'installation automatisé
+- **1.1** :
+   - intégration de [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker)
+   - Intégration de [Gum](https://github.com/charmbracelet/gum)
