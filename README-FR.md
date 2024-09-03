@@ -25,12 +25,12 @@ Pour éviter les conflits avec vos fichiers de notes, vous pouvez créer un fich
 ## Configuration de la synchronisation Obsidian
 
 > [!IMPORTANT]
-> Un script d'installation complet est disponible avec l'utilisation optionnelle de [gum](https://github.com/charmbracelet/gum) pour obtenir une interface de script plus propre.
+> Un script d'installation complet est disponible ~~avec l'utilisation optionnelle de [gum](https://github.com/charmbracelet/gum) pour obtenir une interface de script plus propre~~.
 > Pour l'exécuter, entrez :
 > ```bash
 > curl -o $HOME/install.sh https://raw.githubusercontent.com/GiGiDKR/OhMyObsidian/main/install.sh && chmod +x $HOME/install.sh && $HOME/install.sh
 > ```
-> 🎀 Ajoutez `--gum` ou `-g` à la fin de la commande pour utiliser l'interface [gum](https://github.com/charmbracelet/gum)
+> ~~🎀 Ajoutez `--gum` ou `-g` à la fin de la commande pour utiliser l'interface [gum](https://github.com/charmbracelet/gum)~~
 
 ### Installation manuelle
 
