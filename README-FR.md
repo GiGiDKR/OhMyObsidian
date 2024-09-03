@@ -121,6 +121,6 @@ Tous les coffres seront synchronisés à 04H00 chaque jour en utilisant un profi
 - 1.0.1 : Ajout de la configuration compatible zsh
 - 1.0.2 : Traduction française 
 - 1.0.3 : Ajout d'un [script](install.sh) d'installation automatisé
-- **1.1** :
+- **1.1** : En développement 
    - intégration de [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.tasker)
    - Intégration de [Gum](https://github.com/charmbracelet/gum)
