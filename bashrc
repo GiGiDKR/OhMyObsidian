@@ -1,10 +1,3 @@
-#alias ll="ls -lAFt --color=auto"
-#alias ls="ls -F --color=auto"
-#alias l="ls -1AFt --color=auto"
-
-#alias g="git"
-#alias n="nano"
-
 export PATH="${PATH}:/data/data/com.termux/files/home"
 
 export STORAGE_PATH="/storage/emulated/0/Documents" # if modifying, also change line 2 in the setup script
@@ -25,8 +18,6 @@ alias repos="cd $REPOS_PATH"
 alias obsidian="cd $OBSIDIAN_DIR_PATH"
 alias csetup="cp $SCRIPTS_REPO_PATH/setup $HOME/OhMyObsidian/"
 alias storage="cd $STORAGE_PATH"
-
-#cd "$REPOS_PATH"
 
 export RESET="\033[0m"
 export GREEN="\033[1;32m"
