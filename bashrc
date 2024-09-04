@@ -22,6 +22,7 @@ alias open="bash $HOME/OhMyObsidian/open-vault.sh"
 alias bashrc="nano /data/data/com.termux/files/usr/etc/bash.bashrc"
 alias sbashrc="source /data/data/com.termux/files/usr/etc/bash.bashrc"
 alias repos="cd $REPOS_PATH"
+alias obsidian="cd $OBSIDIAN_DIR_PATH"
 alias csetup="cp $SCRIPTS_REPO_PATH/setup $HOME/OhMyObsidian/"
 alias storage="cd $STORAGE_PATH"
 
